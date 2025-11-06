@@ -1,0 +1,208 @@
+/* Agregando variables CSS para sistema de temas completo */
+:root {
+  /* Colores principales */
+  --color-primary: #212529;
+  --color-primary-hover: #343a40;
+  --color-primary-dark: #131618;
+
+  /* Fondos */
+  --bg-body: #fcfcf7;
+  --bg-elementos: #fcfcf7;
+  --bg-accent: #7c7d7c89;
+  --bg-barra: #fcfcf7;
+  --bg-dragdrp: #d6d6d6;
+
+  --bg-surface: #ffffff;
+  --bg-surface-secondary: #f5f5f5;
+  --bg-surface-tertiary: #fafafa;
+  --bg-input: #ebebe8;
+  --bg-overlay: rgba(0, 0, 0, 0.5);
+  --bg-sidebar: #212529;
+  --bg-modal: #2e3236;
+  --bg-modal-secondary: #3a3d43;
+  --bg-hover: #f3f4f6;
+  --bg-selected: #202123;
+  --bg-accent-dark: #383c40;
+
+  /* Botones */
+  --bg-botonIcon: #212529;
+
+  /* Textos */
+  --text-primary: #1a1a1a;
+  --text-secondary: #666;
+  --text-tertiary: #888;
+  --text-muted: #9ca3af;
+  --text-light: #d1d5db;
+  --text-white: #ffffff;
+  --text-on-dark: #fcfcf7;
+  --text-placeholder: #6b7280;
+
+  /* Bordes */
+  --borde-tabla: #212529;
+  --border-medium: #d1d5db;
+  --border-dark: #9a9b9a;
+  --border-input: #d1d5db;
+
+  /* Estados */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #dc2626;
+  --color-info: #3b82f6;
+  --color-accent: #e47a6e;
+
+  /* Badges */
+  --badge-blue-bg: #dbeafe;
+  --badge-blue-text: #1e40af;
+  --badge-yellow-bg: #fef3c7;
+  --badge-yellow-text: #d97706;
+  --badge-purple-bg: #e0e7ff;
+  --badge-purple-text: #4338ca;
+  --badge-sky-bg: #f0f9ff;
+  --badge-sky-text: #0ea5e9;
+  --badge-indigo-bg: #e0e7ff;
+  --badge-indigo-text: #3730a3;
+
+  /* Sombras */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --shadow-custom: 2px 2px 2px 2px rgba(0, 0, 0, 0.25);
+
+  /* Scrollbar */
+  --scrollbar-track: #6a6b6a;
+  --scrollbar-thumb: #4a4b4a;
+  --scrollbar-thumb-hover: #3a3b3a;
+
+  /* hover */
+  --hover-tabla: #dcdcd7;
+  --hover-inbox: #4d4d4d;
+
+  /* seleccion */
+  --seleccion-1: #acacac;
+
+  /* Input */
+  --Input-Fondo: #ebebe8;
+}
+
+/* Tema oscuro con todas las variables redefinidas */
+.dark-theme {
+  /* Colores principales */
+  --color-primary: #0d0d0d;
+  --color-primary-hover: #262626;
+  --color-primary-dark: #000000;
+
+  /* Fondos */
+  --bg-body: #1a1a1a;
+  --bg-elementos: #252628;
+  --bg-accent: #4a4a4a97;
+  --bg-barra: #171819;
+  --bg-dragdrp: #3a3d40;
+
+  --bg-surface: #2e2e2e;
+  --bg-surface-secondary: #252525;
+  --bg-surface-tertiary: #2a2a2a;
+  --bg-input: #3a3a3a;
+  --bg-overlay: rgba(0, 0, 0, 0.7);
+  --bg-sidebar: #171819;
+  --bg-modal: #1f1f1f;
+  --bg-modal-secondary: #2a2a2a;
+  --bg-hover: #333333;
+  --bg-selected: #0a0a0a;
+
+  --bg-accent-dark: #2a2a2a;
+
+  /* Botones */
+  --bg-botonIcon: #fcfcf7;
+
+  /* Textos */
+  --text-primary: #e0e0e0;
+  --text-secondary: #b0b0b0;
+  --text-tertiary: #909090;
+  --text-muted: #707070;
+  --text-light: #606060;
+  --text-white: #ffffff;
+  --text-on-dark: #e0e0e0;
+  --text-placeholder: #808080;
+
+  /* Bordes */
+  --borde-tabla: #fcfcf7;
+  --border-medium: #404040;
+  --border-dark: #505050;
+  --border-input: #404040;
+
+  /* Estados - mantienen colores vibrantes */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
+  --color-accent: #e47a6e;
+
+  /* Badges - versiones oscuras */
+  --badge-blue-bg: #1e3a5f;
+  --badge-blue-text: #93c5fd;
+  --badge-yellow-bg: #78350f;
+  --badge-yellow-text: #fcd34d;
+  --badge-purple-bg: #3730a3;
+  --badge-purple-text: #c7d2fe;
+  --badge-sky-bg: #0c4a6e;
+  --badge-sky-text: #7dd3fc;
+  --badge-indigo-bg: #312e81;
+  --badge-indigo-text: #a5b4fc;
+
+  /* Sombras */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.7);
+  --shadow-custom: 2px 2px 2px 2px rgba(0, 0, 0, 0.7);
+
+  /* Scrollbar */
+  --scrollbar-track: #2a2a2a;
+  --scrollbar-thumb: #404040;
+  --scrollbar-thumb-hover: #555555;
+
+  /* Hover */
+  --hover-tabla: #434343;
+  --hover-inbox: #2a2a2a;
+
+  /* seleccion */
+  --seleccion-1: #1b1b1b;
+
+  /* Input */
+  --Input-Fondo: #3a3d43;
+}
+
+.layout {
+  width: 100%;
+  margin: 0;
+  display: grid;
+  grid-template-areas: "sidebar body";
+  grid-template-columns: auto 1fr;
+  gap: 8px;
+  background-color: var(--bg-body);
+}
+
+.sidebar {
+  grid-area: sidebar;
+  background-color: var(--bg-sidebar);
+  color: var(--text-white);
+  height: 100vh;
+  width: 200px;
+  position: fixed;
+  transition: background-color 0.3s ease;
+}
+
+.body {
+  grid-area: body;
+  background-color: var(--bg-body);
+  color: var(--text-primary);
+  margin-left: 200px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  /* Added width: 100% and overflow handling to prevent white space */
+  width: calc(100% - 200px);
+  min-height: 100vh;
+}
+
+.sidebar-content {
+  background-color: var(--bg-sidebar);
+  transition: background-color 0.3s ease;
+}

@@ -1,0 +1,67 @@
+.Asignaciones_estados {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 20px;
+    height: 60vh;
+}
+
+.Asignaciones_apartado {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+    width: 18%;
+    padding-top: 10px;
+}
+
+.Asignaciones_apartado-titulo {
+    width: 85%;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    align-items: center;
+    height: 7%;
+    border-radius: 20px;
+}
+
+.Asignaciones_apartado-contenido-contenedor {
+    width: 90%;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    max-height: 50vh;
+    overflow-y: auto;
+    scrollbar-color: transparent transparent;
+}
+
+.Asignaciones_apartado-contenido{
+    display: flex;
+    border-radius: 10px;
+    padding: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    width: 90%;
+    margin-bottom: 5px;
+}
+
+.Asignaciones_apartado-contenido:hover{
+    scale: 1.02;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.25);
+}
+
+.Asignaciones_apartado-contenido-texto {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 5px;
+}   
+
+.Asignaciones_apartado-contenido-texto p{
+    margin: 0;
+}
+
+.Asignaciones_detalle {
+    display: flex;
+}

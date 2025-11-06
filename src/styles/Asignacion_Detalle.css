@@ -1,0 +1,63 @@
+.Asignaciones_detalladas {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+}
+
+.Asignacion_Informacion {
+    border-radius: 10px;
+    padding-left: 10px;
+    background-color: var(--bg-elementos);
+    box-shadow: var(--shadow-custom);
+}
+
+.Asignaciones_detalle_info {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 10px;
+}
+
+.Asignaciones_detalle_info {
+    font-size: 20px;
+}
+ 
+.Asignacion_Info h2, 
+.Asignaciones_Historial h3, 
+.Asignaciones_detalle_descripcion h3{
+    font-weight: 100;
+}
+
+.Asignaciones_detalle_info1 {
+    display: grid;
+    width: 50%;
+}
+
+.Asignaciones_detalle_info2 {
+    display: grid;
+    width: 50%;
+    justify-content: center;
+}
+
+.Asignaciones_detalle_infoA, 
+.Asignaciones_detalle_infoP {
+    display: flex;
+    width: 120%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Asignaciones_detalle_descripcion h3 {
+    font-size: 20px;
+}
+
+.Asignaciones_Historial h3 {
+    font-size: 25px;
+}
+
+.Asignaciones_Historial{
+    border-radius: 10px;
+    padding-left: 10px;
+    background-color: var(--bg-elementos);
+    box-shadow: var(--shadow-custom);
+} 

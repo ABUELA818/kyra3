@@ -1,0 +1,149 @@
+.Chats_Contenedor {
+  display: flex;
+  background-color: var(--bg-body);
+  height: 100vh;
+  transition: background-color 0.3s ease;
+  margin-left: -8px;
+}
+ 
+.Chats_Contenido {
+  display: flex;
+  flex: 1;
+  gap: 0;
+  margin-left: 20px;
+}
+
+.Mensajes_Recibidos {
+  width: 30%;
+  min-width: 280px;
+  background-color: var(--bg-elementos);
+  color: var(--text-primary);
+  margin: 10px 10px;
+  border-radius: 20px;
+  box-shadow: var(--shadow-custom);
+  display: flex;
+  flex-direction: column;
+  margin-left: -8px;
+  transition: background-color 0.3s ease;
+}
+
+.Mensajes_Recibidos_Titulo {
+  display: flex;
+  justify-content: center;
+  padding: 30px 0 20px 0;
+  margin: 0;
+  font-size: 25px;
+  font-weight: 100;
+  border-bottom: 1px solid var(--borde-tabla);
+}
+ 
+.Input_Busqueda_Contenedor {
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.Input_Busqueda {
+  width: 90%;
+  padding: 10px 15px;
+  border-radius: 20px;
+  border: none;
+  background-color: var(--Input-Fondo);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-custom);
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.Input_Busqueda::placeholder {
+  color: var(--text-tertiary);
+}
+
+.Input_Busqueda:focus {
+  outline: none;
+}
+
+.Mensajes_Lista {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0;
+}
+
+.Chat_Item {
+  padding: 16px 20px;
+  border-bottom: 0.5px solid var(--borde-tabla);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.Chat_Item:hover {
+  background-color: var(--hover-tabla);
+}
+
+.Chat_Item.seleccionada {
+  background-color: var(--seleccion-1);
+  border-left: 4px solid #E47A6E;
+}
+
+.Mensaje_Autor {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.Autor_Nombre {
+  font-size: 15px;
+  font-weight: 100;
+}
+
+.Mensaje_Contenido {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.Mensaje_Texto {
+  font-size: 14px;
+  font-weight: 400;
+  margin: 0;
+  flex: 1;
+  line-height: 1.4;
+
+  /* Evita que el texto se desborde */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.Mensaje_Fecha {
+  font-size: 12px;
+  color: var(--text-light);
+  white-space: nowrap;
+}
+
+/* Área principal donde se ven los mensajes */
+.Chat_Principal {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-body);
+  height: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.Chat_Vista_Mensajes {
+  overflow-y: auto;
+  height: 100%;
+  padding: 20px;
+}
+
+.Sin_Seleccion {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--text-muted);
+  font-size: 16px;
+}

@@ -1,0 +1,224 @@
+/* --- Contenedor Principal --- */
+.Archivo_Contenedor {
+  display: flex;
+  height: 100vh;
+  background-color: #FCFCF7;
+  padding: 24px;
+  gap: 24px;
+  margin-left: -8px;
+}
+
+.Archivo_ColumnaIzquierda {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.Archivo_ColumnaDerecha {
+  flex: 2;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  overflow-y: auto;
+}
+
+/* --- Información del Archivo --- */
+.Archivo_Contenedor_Informacion {
+  display: flex;
+  align-items: center;
+}
+
+.Archivo_InfoContenedor {
+  display: flex;
+  flex-direction: column;
+  background-color: #FCFCF7;
+  padding: 20px;
+  gap: 10px;
+}
+
+.Archivo_InfoTitulo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.Archivo_InfoTitulo h1 {
+  font-size: 22px;
+  font-weight: 100;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.Archivo_InfoTitulo span {
+  font-size: 14px;
+  color: #888;
+}
+
+.Archivo_InfoAutor {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.Archivo_InfoAutor p {
+  margin: 0;
+  font-size: 15px;
+  color: #555;
+}
+
+.Estado_Badge {
+  background-color: #e0e7ff;
+  color: #4338ca;
+  padding: 4px 10px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.Archivo_InfoFecha {
+  font-size: 14px;
+  color: #888;
+  margin: 0;
+}
+
+/* --- Barra de Acciones y Compartido --- */
+.Archivo_AccionesContenedor {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 16px 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.Archivo_CompartidoCon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+.Barra_Acciones {
+  display: flex;
+  gap: 15px;
+}
+
+.Barra_Acciones button {
+  background-color: transparent;
+  border: none;
+  transition: 0.5s;
+  font-size: 10px;
+}
+
+.Barra_Acciones button:hover {
+  scale: 1.18;
+}
+
+
+/* --- Vista Previa del Documento --- */
+.Archivo_VistaPrevia {
+  padding: 24px;
+  color: #555;
+  line-height: 1.7;
+}
+
+.Placeholder_Documento {
+  text-align: center;
+  margin-top: 40px;
+  font-style: italic;
+  color: #aaa;
+}
+
+
+.Modal_Overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex; justify-content: center; align-items: center;
+  left: var(--sidebar-width, 200px);
+  backdrop-filter: blur(10px);
+  z-index: 999999;
+}
+
+.Modal_Contenido {
+  background-color: #2E3236;
+  padding: 24px;
+  border-radius: 12px;
+  width: 400px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: white;
+}
+
+.Modal_Contenido h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 100;
+}
+
+.Modal_InputBusqueda {
+  display: flex;
+  justify-content: center;
+}
+
+.Modal_InputBusqueda input {
+  width: 95%;
+  background-color: #3A3D43;
+    border: none;
+    padding: 10px 15px;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    color: white;
+}
+
+.Modal_Acciones {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.Modal_Acciones select {
+  flex: 1;
+  margin: 0 .25rem;
+  border: none;
+  border-radius: 20px;
+  padding: .6rem;
+  color: #fff;
+  cursor: pointer;
+  background-color: #3A3D43;
+  box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.25);
+  transition: 0.5s;
+}
+
+.Modal_Botones {
+    display: flex;
+    gap: 10px;
+}
+
+.Boton_Cancelar, .Boton_Enviar {
+  flex: 1;
+  margin: 0 .25rem;
+  border: none;
+  border-radius: 20px;
+  padding: .6rem;
+  color: #fff;
+  cursor: pointer;
+  background-color: #3A3D43;
+  box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.25);
+  transition: 0.5s;
+  width: 100px;
+}
+
+.Boton_Cancelar:hover , 
+.Boton_Enviar:hover {
+  scale: 1.03;
+  background-color: #131618;
+}

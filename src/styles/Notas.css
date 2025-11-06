@@ -1,0 +1,67 @@
+.notas-contenedor {
+    margin-top: 15px;
+    padding-top: 15px;
+    margin-left: 4%;
+}
+
+.notas-notas {
+    max-height: 45vh;
+    overflow-y: auto;
+    width: 110%;
+    scrollbar-width: none;
+    padding: 2px;
+    padding-bottom: 10px;
+}
+
+.Notas-titulo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 25px;
+    width: 105%;
+}
+
+.boton {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--bg-botonIcon);
+}
+
+.nota-item{
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    background-color: var(--bg-elementos);
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-top: 10px;
+    box-shadow: var(--shadow-custom);
+}
+ 
+.nota-input {
+    width: 90%;
+    background-color: var(--bg-elementos);
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-custom);
+    border: none;
+} 
+
+.nota-delete-btn {
+    background-color: transparent;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+}
+
+.nota-delete-btn:hover {
+    scale: 1.05;
+    color: crimson;
+}
+
+.nota-texto {
+    width: 100%;
+}

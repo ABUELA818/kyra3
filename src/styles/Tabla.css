@@ -1,0 +1,62 @@
+/*
+  Estilos para el componente Tabla.
+  La técnica usada aquí es para lograr una tabla con cabecera fija y un cuerpo con scroll.
+*/
+
+.Tabla {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse; /* Une los bordes de las celdas. */
+  table-layout: fixed;     /* Asegura que las columnas mantengan un ancho uniforme. */
+}
+
+/* Forzar a thead a comportarse como una tabla para alinear las columnas. */
+.Tabla thead {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+/* La clave del scroll: tbody se convierte en un bloque con altura máxima y overflow. */
+.Tabla tbody {
+  display: block;
+  overflow-y: auto;
+  width: 100%;
+}
+
+/* Cada fila del cuerpo también debe ser una tabla para mantener la alineación. */
+.Tabla tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  transition: background-color 0.3s, transform 0.3s; /* Transición suave para el hover. */
+}
+
+/* Estilos para las celdas del encabezado. */
+.Tabla th {
+  font-weight: 300;
+  border-bottom: 0.5px solid var(--borde-tabla);
+  padding: 12px 8px; /* Añadido un poco de padding para que no se vea tan pegado. */
+}
+
+/* Estilos para las celdas de datos. */
+.Tabla td {
+  border-bottom: 0.5px solid var(--borde-tabla);
+  height: 50px;
+  padding: 8px; /* Añadido padding. */
+  
+  /* Esto evita que el texto largo rompa el layout. */
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/*
+  Optimización: En lugar de usar una clase .Hover, aplico el efecto directamente
+  a las filas (tr) del tbody cuando el cursor está encima.
+  Esto es más eficiente y limpio.
+*/
+.Tabla tbody tr:hover {
+  transform: scale(1.005);
+  background-color: var(--hover-tabla);
+}

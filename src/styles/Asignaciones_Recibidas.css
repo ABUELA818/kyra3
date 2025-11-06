@@ -1,0 +1,23 @@
+.Asignaciones_Recibidas_Titulo {
+    align-items: center;
+    font-size: 25px;
+}
+
+.Asignaciones_Recibidas_Inicio {
+    margin-top: 15px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-custom);
+    padding-top: 15px;
+    padding-left: 15px;
+    width: 90%;
+    height: 100%;
+    background-color: var(--bg-elementos);
+} 
+
+.texto {
+    margin: 0;
+} 
+
+.Asignaciones_Recibidas_Contenido {
+    margin-left: -15px;
+}
