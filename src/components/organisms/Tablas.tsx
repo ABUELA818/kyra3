@@ -11,36 +11,50 @@ interface TablaProps {
   TletraDatos: number
   TletraEncabezado: number
   AlturaMaxima: number
+  TaFila?: number
+  AlturaMinima?: number
 }
 
-export default function Tabla({ columnas, datos, TletraDatos, TletraEncabezado, AlturaMaxima }: TablaProps) {
+export default function Tabla({
+  columnas,
+  datos,
+  TletraDatos,
+  TletraEncabezado,
+  AlturaMaxima,
+  AlturaMinima = 30, // altura mínima por defecto de 30vh
+}: TablaProps) {
+  const estaVacia = datos.length === 0
+
   return (
-    // El contenedor principal de la tabla.
-    <table className="Tabla">
-      {/* La cabecera de la tabla (thead) donde van los títulos. */}
-      <thead>
-        <tr style={{ fontSize: `${TletraEncabezado}px` }}>
-          {/* Hago un map para crear cada celda del encabezado (th). */}
-          {columnas.map((col, i) => (
-            <th key={i}>{col}</th>
-          ))}
-        </tr>
-      </thead>
-      {/* El cuerpo de la tabla (tbody) donde van los datos. */}
-      {/* Le pongo una altura máxima para que el scroll funcione. */}
-      <tbody style={{ maxHeight: `${AlturaMaxima}vh` }}>
-        {/* Hago un map sobre los datos para crear cada fila (tr). */}
-        {datos.map((fila, i) => (
-          <tr key={i} style={{ fontSize: `${TletraDatos}px` }}>
-            {/* Hago otro map dentro de cada fila para crear las celdas (td). */}
-            {fila.map((dato, j) => (
-              <td key={j}>
-                {dato}
-              </td>
+    <div className="tabla-wrapper">
+      <table className="Tabla">
+        {/* La cabecera de la tabla (thead) donde van los títulos. */}
+        <thead>
+          <tr style={{ fontSize: `${TletraEncabezado}px` }}>
+            {/* Hago un map para crear cada celda del encabezado (th). */}
+            {columnas.map((col, i) => (
+              <th key={i}>{col}</th>
             ))}
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        {/* El cuerpo de la tabla (tbody) donde van los datos. */}
+        <tbody
+          style={{
+            maxHeight: `${AlturaMaxima}vh`,
+            minHeight: `${AlturaMinima}vh`,
+          }}
+        >
+          {/* Hago un map sobre los datos para crear cada fila (tr). */}
+          {datos.map((fila, i) => (
+            <tr key={i} style={{ fontSize: `${TletraDatos}px` }}>
+              {/* Hago otro map dentro de cada fila para crear las celdas (td). */}
+              {fila.map((dato, j) => (
+                <td key={j}>{dato}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   )
-} 
+}

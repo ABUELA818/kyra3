@@ -1,65 +1,119 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { NuevoProyectoForm } from "@/types/Proyectos";
-import { Usuario } from "@/types/Usuario";
+import type React from "react"
 
-interface Usuario {
-  id: number;
-  nombre: string;
-}
+import { useState, useEffect } from "react"
+import type { NuevoProyectoForm } from "@/types/Proyectos"
+import type { Usuario } from "@/types/Usuario"
+import type { Equipo } from "@/types/Equipos"
+import { getEquiposByUsuario } from "@/services/Equipos.service"
+import { useUser } from "@/context/userContext"
 
 interface CrearProyectoProps {
-  usuarios: UsuarioParaFormulario[];
-  onClose: () => void;
-  onCrearProyecto: (proyecto: NuevoProyectoForm) => void; // Prop para enviar los datos
+  usuarios: Usuario[]
+  onClose: () => void
+  onCrearProyecto: (proyecto: NuevoProyectoForm & { equipoId?: number; crearNuevoEquipo?: boolean }) => void
 }
 
 export default function Crear_Proyecto({ usuarios = [], onClose, onCrearProyecto }: CrearProyectoProps) {
-
+  const { usuario } = useUser()
   const [formData, setFormData] = useState<NuevoProyectoForm>({
     titulo: "",
     descripcion: "",
     fecha_inicio: "",
     fecha_termino: "",
     miembros: [],
-  });
+  })
 
-  const [usuariosBusqueda, setUsuariosBusqueda] = useState("");
-  const [mostrarUsuarios, setMostrarUsuarios] = useState(false);
+  const [busqueda, setBusqueda] = useState("")
+  const [mostrarDropdown, setMostrarDropdown] = useState(false)
+
+  const [equipos, setEquipos] = useState<Equipo[]>([])
+  const [equipoSeleccionado, setEquipoSeleccionado] = useState<number | null>(null)
+
+  useEffect(() => {
+    const cargarEquipos = async () => {
+      if (usuario?.id) {
+        const equiposUsuario = await getEquiposByUsuario(usuario.id)
+        setEquipos(equiposUsuario)
+      }
+    }
+    cargarEquipos()
+  }, [usuario])
+
+  const equiposFiltrados = equipos.filter(
+    (equipo) =>
+      equipo &&
+      equipo.ID_Equipo &&
+      equipo.Nombre_Equipo &&
+      equipo.Nombre_Equipo.toLowerCase().includes(busqueda.toLowerCase()),
+  )
 
   const usuariosFiltrados = usuarios.filter(
     (usuario) =>
-      usuario.nombre.toLowerCase().includes(usuariosBusqueda.toLowerCase()) &&
-      !formData.miembros.includes(usuario.id)
-  );
+      usuario &&
+      usuario.id &&
+      usuario.nombre &&
+      usuario.nombre.toLowerCase().includes(busqueda.toLowerCase()) &&
+      !formData.miembros.includes(usuario.id),
+  )
 
   // --- MANEJADORES ---
   const agregarUsuario = (usuarioId: number) => {
     setFormData((prev) => ({
       ...prev,
       miembros: [...prev.miembros, usuarioId],
-    }));
-    setUsuariosBusqueda("");
-    setMostrarUsuarios(false);
-  };
+    }))
+    setBusqueda("")
+    setMostrarDropdown(false)
+    if (equipoSeleccionado) {
+      setEquipoSeleccionado(null)
+    }
+  }
 
   const removerUsuario = (usuarioId: number) => {
     setFormData((prev) => ({
       ...prev,
       miembros: prev.miembros.filter((id) => id !== usuarioId),
-    }));
-  };
+    }))
+  }
+
+  const seleccionarEquipo = (equipoId: number) => {
+    setEquipoSeleccionado(equipoId)
+    setBusqueda("")
+    setMostrarDropdown(false)
+    setFormData((prev) => ({
+      ...prev,
+      miembros: [],
+    }))
+  }
 
   const manejarCambio = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
+    const { name, value } = e.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
+  }
 
   const manejarSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onCrearProyecto(formData);
-  };
+    e.preventDefault()
+    if (equipoSeleccionado) {
+      onCrearProyecto({
+        ...formData,
+        equipoId: equipoSeleccionado,
+        crearNuevoEquipo: false,
+      })
+    } else {
+      onCrearProyecto({
+        ...formData,
+        crearNuevoEquipo: true,
+      })
+    }
+  }
+
+  const handleBusquedaInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const valor = e.target.value
+    setBusqueda(valor)
+    setMostrarDropdown(true)
+  }
 
   return (
     <div className="Crear_Proyecto_Contenedor" onClick={onClose}>
@@ -72,65 +126,89 @@ export default function Crear_Proyecto({ usuarios = [], onClose, onCrearProyecto
           <div className="Crear_Proyecto_Inputs">
             <input
               type="text"
-              name="titulo" 
+              name="titulo"
               className="Crear_Proyecto_Input_Nombre"
               placeholder="Nombre del Proyecto"
               value={formData.titulo}
               onChange={manejarCambio}
               required
             />
-            <input
-              type="text"
-              className="Crear_Proyecto_Input_Usuarios"
-              placeholder="Buscar Usuarios para asignar"
-              value={usuariosBusqueda}
-              onChange={(e) => {
-                setUsuariosBusqueda(e.target.value);
-                setMostrarUsuarios(e.target.value.length > 0);
-              }}
-            />
-          </div>
 
-          {mostrarUsuarios && usuariosFiltrados.length > 0 && (
-            <div className="usuarios-dropdown">
-              {usuariosFiltrados.map((usuario) => (
-                <div key={usuario.id} className="usuario-opcion" onClick={() => agregarUsuario(usuario.id)}>
-                  {usuario.nombre}
+            <div className="input-wrapper">
+              <input
+                type="text"
+                className="Crear_Proyecto_Input_Usuarios"
+                placeholder="Buscar Equipos o Usuarios"
+                value={busqueda}
+                onChange={handleBusquedaInput}
+                onFocus={() => setMostrarDropdown(true)}
+              />
+              {mostrarDropdown && (equiposFiltrados.length > 0 || usuariosFiltrados.length > 0) && (
+                <div className="usuarios-dropdown">
+                  {equiposFiltrados.length > 0 && (
+                    <>
+                      <div className="dropdown-seccion-titulo">Equipos</div>
+                      {equiposFiltrados.map((equipo) => (
+                        <div
+                          key={`equipo-${equipo.ID_Equipo}`}
+                          className="usuario-opcion equipo-opcion"
+                          onClick={() => seleccionarEquipo(equipo.ID_Equipo)}
+                        >
+                          <span className="equipo-icono">👥</span> {equipo.Nombre_Equipo}
+                        </div>
+                      ))}
+                    </>
+                  )}
+                  {usuariosFiltrados.length > 0 && (
+                    <>
+                      <div className="dropdown-seccion-titulo">Usuarios</div>
+                      {usuariosFiltrados.map((usuario) => (
+                        <div
+                          key={`usuario-${usuario.id}`}
+                          className="usuario-opcion"
+                          onClick={() => agregarUsuario(usuario.id)}
+                        >
+                          <span className="usuario-icono">👤</span> {usuario.nombre}
+                        </div>
+                      ))}
+                    </>
+                  )}
                 </div>
-              ))}
+              )}
             </div>
-          )}
-
-          {formData.miembros.length > 0 && (
-            <div className="usuarios-seleccionados">
-              {formData.miembros.map((usuarioId) => {
-                const usuario = usuarios.find((u) => u.id === usuarioId);
-                return usuario ? (
-                  <div key={usuarioId} className="usuario-seleccionado">
-                    <span>{usuario.nombre}</span>
-                    <button type="button" onClick={() => removerUsuario(usuarioId)} className="remover-usuario">×</button>
-                  </div>
-                ) : null;
-              })}
-            </div>
-          )}
-
-          {/* 7. Campo de Descripción añadido */}
-          <div className="form-grupo">
-            <textarea
-              name="descripcion"
-              placeholder="Descripción del proyecto"
-              value={formData.descripcion}
-              onChange={manejarCambio}
-              className="form-textarea"
-              rows={3}
-            />
           </div>
+
+          {equipoSeleccionado ? (
+            <div className="equipo-seleccionado-container">
+              <div className="equipo-seleccionado">
+                <span>Equipo: {equipos.find((e) => e.ID_Equipo === equipoSeleccionado)?.Nombre_Equipo}</span>
+                <button type="button" onClick={() => setEquipoSeleccionado(null)} className="remover-usuario">
+                  ×
+                </button>
+              </div>
+            </div>
+          ) : (
+            formData.miembros.length > 0 && (
+              <div className="usuarios-seleccionados">
+                {formData.miembros.map((usuarioId) => {
+                  const usuario = usuarios.find((u) => u.id === usuarioId)
+                  return usuario ? (
+                    <div key={usuarioId} className="usuario-seleccionado">
+                      <span>{usuario.nombre}</span>
+                      <button type="button" onClick={() => removerUsuario(usuarioId)} className="remover-usuario">
+                        ×
+                      </button>
+                    </div>
+                  ) : null
+                })}
+              </div>
+            )
+          )}
 
           <div className="Crear_Proyecto_Fechas">
             <div className="Crear_Proyecto_FechaInicio">
               <label>Fecha de Inicio:</label>
-              <input type="date" name="fecha_inicio" value={formData.fecha_inicio} onChange={manejarCambio} required/>
+              <input type="date" name="fecha_inicio" value={formData.fecha_inicio} onChange={manejarCambio} required />
             </div>
             <div className="Crear_Proyecto_FechaTermino">
               <label>Fecha de Término:</label>
@@ -139,12 +217,15 @@ export default function Crear_Proyecto({ usuarios = [], onClose, onCrearProyecto
           </div>
 
           <div className="Crear_Proyecto_Botones">
-            <button type="button" onClick={onClose} className="boton-cancelar">Cancelar</button>
-            <button type="submit" className="boton-crear">Crear Proyecto</button>
+            <button type="button" onClick={onClose} className="boton-cancelarP">
+              Cancelar
+            </button>
+            <button type="submit" className="boton-crearP">
+              Crear Proyecto
+            </button>
           </div>
         </form>
       </div>
     </div>
-  );
+  )
 }
-

@@ -1,16 +1,19 @@
+aside {
+  height: 100vh;
+}
+
 .sidebar-content {
-  background-color: var(--bg-sidebar);
   display: flex;
   flex-direction: column;
   padding-left: 20%;
   gap: 25px;
   position: inherit;
+  height: 100%;
 }
 
 .ImagenLogo {
   margin-top: 20px;
   margin-bottom: 40px;
-  margin-left: -25px;
 }
 
 .inbox-button {
@@ -42,10 +45,6 @@
   padding: 0;
   text-decoration: none;
   transition: opacity 0.2s ease;
-}
-
-.equipos-toggle:hover {
-  opacity: 0.8;
 }
 
 .equipos-arrow {
@@ -86,14 +85,15 @@
 
 .equipo-item {
   display: block;
-  padding: 8px 0;
+  padding: 8px 5px;
   text-decoration: none;
-  transition: opacity 0.2s ease;
+  transition: 0.2s ease;
   font-size: 14px;
+  border-radius: 20px;
 }
 
 .equipo-item:hover {
-  opacity: 0.8;
+  background-color: var(--Hover-tabla);
 }
 
 .crear-equipo-btn {
@@ -103,42 +103,55 @@
   display: block;
   padding: 8px 0;
   text-decoration: none;
-  transition: opacity 0.2s ease;
+  transition: 0.2s ease;
   font-weight: bold;
   border-bottom: 1px solid #495057;
   margin-bottom: 8px;
   padding-bottom: 12px;
   text-align: left;
   width: 100%;
+  border-radius: 20px;
+  border: none;
 }
 
 .crear-equipo-btn:hover {
-  opacity: 0.8;
+  background-color: var(--Hover-tabla);
 }
 
 .Crear_Equipos_Contenedor {
   position: fixed;
   top: 0;
-  left: var(--sidebar-width, 200px);
+  left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 999999;
+  left: var(--sidebar-width, 200px);
+  backdrop-filter: blur(12px);
+  z-index: 1000002;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .Crear_Equipos_Formulario {
-  background-color: var(--bg-elementos);
+  background-color: var(--Fondo-elementos);
   border-radius: 20px;
   width: 90%;
   max-width: 500px;
   max-height: 90vh;
   overflow-y: auto;
   box-shadow: var(--shadow-custom);
-  z-index: 9999999;
+  z-index: 10001;
 }
 
 .Crear_Equipos_Titulo {
@@ -146,14 +159,14 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px 24px;
-  border-bottom: 1px solid var(--borde-tabla);
+  border-bottom: 1px solid var(--Borde-tabla);
 }
 
 .Crear_Equipos_Titulo h3 {
   margin: 0;
   color: var(--text-primary);
   font-size: 20px;
-  font-weight: 100;
+  font-weight: 400;
 }
 
 .Crear_Equipos_Cerrar {
@@ -161,7 +174,7 @@
   border: none;
   font-size: 24px;
   cursor: pointer;
-  color: var(--text-primary);
+  color: var(--Texto-primario);
   padding: 0;
   width: 30px;
   height: 30px;
@@ -169,11 +182,13 @@
   align-items: center;
   justify-content: center;
   transition: 0.5s;
+  border-radius: 20px;
 }
 
 .Crear_Equipos_Cerrar:hover {
   scale: 1.5;
   transform: rotate(180deg);
+  background-color: var(--Hover-tabla);
 }
 
 .Crear_Equipos_Contenido {
@@ -187,7 +202,7 @@
 .Formulario_Equipo label {
   display: block;
   margin-bottom: 8px;
-  color: var(--text-primary);
+  color: var(--Texto-primario);
   font-weight: 100;
   font-size: 15px;
 }
@@ -211,23 +226,32 @@
   font-size: 15px;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s ease;
   transition: 0.2s;
-  background-color: #2e3236;
   border-radius: 20px;
-  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--shadow-custom);
   color: white;
+}
+
+.Crear_Equipos_Cancelar {
+  background-color: var(--Btn-cancelar);
+}
+
+.Crear_Equipos_Cancelar:hover {
+  background-color: var(--Hover-cancelar);
+  scale: 1.04;
+}
+
+.Crear_Equipos_Crear {
+  background-color: var(--Btn-primario);
+}
+
+.Crear_Equipos_Crear:hover {
+  scale: 1.04;
 }
 
 .Formulario_Contenedor_Equipo {
   display: flex;
   gap: 10px;
-}
-
-.Crear_Equipos_Cancelar:hover,
-.Crear_Equipos_Crear:hover {
-  background-color: rgb(21, 27, 30);
-  scale: 1.08;
 }
 
 .form-input,
@@ -242,10 +266,16 @@
   box-shadow: var(--shadow-custom);
   border-radius: 20px;
   border: none;
-  color: var(--text-primary);
+  color: var(--Texto-primario);
+}
+
+.buscar-usuarios-container {
+  position: relative;
+  width: 50%;
 }
 
 .usuarios-dropdown {
+  position: absolute;
   top: 100%;
   left: 0;
   right: 0;
@@ -255,8 +285,9 @@
   border-radius: 0 0 6px 6px;
   max-height: 150px;
   overflow-y: auto;
-  z-index: 10;
-  color: var(--text-primary);
+  z-index: 10002;
+  color: var(--Texto-primario);
+  box-shadow: var(--shadow-custom);
 }
 
 .usuario-opcion {
@@ -266,7 +297,7 @@
 }
 
 .usuario-opcion:hover {
-  background-color: var(--hover-tabla);
+  background-color: var(--Hover-tabla);
 }
 
 .usuarios-seleccionados {
@@ -280,8 +311,9 @@
   align-items: center;
   gap: 6px;
   padding: 6px 10px;
-  background-color: #e0e7ff;
-  color: #3730a3;
+  background-color: var(--seleccion-1);
+  color: var(--Texto-primario);
+  box-shadow: var(--shadow-custom);
   border-radius: 20px;
   font-size: 14px;
   margin-top: 20px;
@@ -290,7 +322,7 @@
 .remover-usuario {
   background: none;
   border: none;
-  color: #6366f1;
+  color: var(--Texto-primario);
   cursor: pointer;
   font-size: 16px;
   font-weight: bold;
@@ -305,5 +337,32 @@
 }
 
 .remover-usuario:hover {
-  background-color: rgba(99, 102, 241, 0.1);
+  background-color: var(--Hover-tabla);
+}
+
+.boton_usuario_side {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 50px;
+}
+
+.usuario_icono_side {
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 20px;
+  font-Weight: 500;
 }

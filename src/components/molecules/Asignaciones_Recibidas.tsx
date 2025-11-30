@@ -11,11 +11,15 @@ interface AsignacionesRecibidasProps {
 export default function Asignaciones_Recibidas({ asignaciones }: AsignacionesRecibidasProps) {
   const columnas = ["Tarea", "Fecha de entrega", "Prioridad"]
 
-  const datos = asignaciones.map((asig) => [
-    asig.Titulo_Asignacion,
-    new Date(asig.Fecha_Entrega).toLocaleDateString(),
-    asig.Prioridad,
-  ])
+  const formatearFecha = (fechaISO: string): string => {
+    if (!fechaISO) return "N/A"
+    const date = new Date(fechaISO)
+    // Check if date is valid
+    if (isNaN(date.getTime())) return "N/A"
+    return date.toLocaleDateString("es-ES", { day: "2-digit", month: "2-digit", year: "numeric" })
+  }
+
+  const datos = asignaciones.map((asig) => [asig.Titulo_Asignacion, formatearFecha(asig.Fecha_Entrega), asig.Prioridad])
 
   return (
     <div className="Asignaciones_Recibidas_Inicio">
@@ -28,7 +32,7 @@ export default function Asignaciones_Recibidas({ asignaciones }: AsignacionesRec
             No hay nuevas asignaciones
           </div>
         ) : (
-          <Tabla columnas={columnas} datos={datos} TletraDatos={14} TletraEncabezado={16} AlturaMaxima={38} />
+          <Tabla columnas={columnas} datos={datos} TletraDatos={14} TletraEncabezado={16} AlturaMaxima={45} />
         )}
       </div>
     </div>

@@ -2,38 +2,37 @@
 
 import { useState, useRef, useEffect } from "react"
 
-// --- CAMBIO 1: Añadimos la prop onDeleteClick ---
 interface BotonAccionProps {
-  onRoleChange?: (role: "Miembro" | "Admin") => void;
-  onDeleteClick?: () => void;
+  currentRole?: "Miembro" | "Admin"
+  onRoleChange?: (role: "Miembro" | "Admin") => void
+  onDeleteClick?: () => void
 }
 
-export default function Boton_Accion({ onRoleChange, onDeleteClick }: BotonAccionProps) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
+export default function Boton_Accion({ currentRole = "Miembro", onRoleChange, onDeleteClick }: BotonAccionProps) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const menuRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setIsMenuOpen(false);
+        setIsMenuOpen(false)
       }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
+    }
+    document.addEventListener("mousedown", handleClickOutside)
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [])
 
-  // --- CAMBIO 2: Corregimos los valores que se envían ---
   const handleRoleSelect = (role: "Miembro" | "Admin") => {
-    onRoleChange?.(role);
-    setIsMenuOpen(false);
-  };
-  
+    onRoleChange?.(role)
+    setIsMenuOpen(false)
+  }
+
   const handleDelete = () => {
-    onDeleteClick?.();
-    setIsMenuOpen(false);
-  };
+    onDeleteClick?.()
+    setIsMenuOpen(false)
+  }
 
   return (
     <div style={{ position: "relative" }} ref={menuRef}>
@@ -43,13 +42,18 @@ export default function Boton_Accion({ onRoleChange, onDeleteClick }: BotonAccio
 
       {isMenuOpen && (
         <div className="Menu_Rol">
-          <button className="Menu_Rol_Item" onClick={() => handleRoleSelect("Miembro")}>
-            Miembro
+          <button
+            className={`Menu_Rol_Item ${currentRole === "Miembro" ? "active" : ""}`}
+            onClick={() => handleRoleSelect("Miembro")}
+          >
+            {currentRole === "Miembro" && "✓ "}Miembro
           </button>
-          <button className="Menu_Rol_Item" onClick={() => handleRoleSelect("Admin")}>
-            Administrador
+          <button
+            className={`Menu_Rol_Item ${currentRole === "Admin" ? "active" : ""}`}
+            onClick={() => handleRoleSelect("Admin")}
+          >
+            {currentRole === "Admin" && "✓ "}Administrador
           </button>
-          {/* --- CAMBIO 3: Añadimos un separador y el botón de eliminar --- */}
           <div className="menu-separador"></div>
           <button className="Menu_Rol_Item menu-item-peligro" onClick={handleDelete}>
             Eliminar del equipo

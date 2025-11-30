@@ -16,16 +16,9 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
-    try {
-      await login(email, password)
-    } catch (err) {
-      console.error("Login error:", err)
-    } finally {
-      setIsLoading(false)
-    }
+    await login(email, password)
+    setIsLoading(false)
   }
-
-  console.log("shdcbiaewluvfoaleirvcniaseucbsecfhjkjbcxesbcfaerlivbkaeruvbcleraibvcdalsiucnlidsuabvclawenclevrbchlrjncldsibcearifbvafraLIBYULVABFDLVUYCBLREVICJNKVCHBRELVBCILCBLEQRB")
 
   return (
     <div className="login-container">

@@ -1,174 +1,76 @@
 /* Agregando variables CSS para sistema de temas completo */
 :root {
-  /* Colores principales */
-  --color-primary: #212529;
-  --color-primary-hover: #343a40;
-  --color-primary-dark: #131618;
+  /*Fondos*/
+  --Fondo-pantalla: #FCFCF7;
+  --Fondo-elementos: #FCFCF7;
+  --Fondo-elementos2: #fcfcf7;
+  --Fondo-sidebar: #212529;
 
-  /* Fondos */
-  --bg-body: #fcfcf7;
-  --bg-elementos: #fcfcf7;
-  --bg-accent: #7c7d7c89;
-  --bg-barra: #fcfcf7;
-  --bg-dragdrp: #d6d6d6;
+  /*Textos*/
+  --Texto-primario: #111315;
+  --Texto-segundo: #FCFCF7;
+  --Texto-blanco: #ffffff;
+  --Texto-tercero: #808588;
 
-  --bg-surface: #ffffff;
-  --bg-surface-secondary: #f5f5f5;
-  --bg-surface-tertiary: #fafafa;
-  --bg-input: #ebebe8;
-  --bg-overlay: rgba(0, 0, 0, 0.5);
-  --bg-sidebar: #212529;
-  --bg-modal: #2e3236;
-  --bg-modal-secondary: #3a3d43;
-  --bg-hover: #f3f4f6;
-  --bg-selected: #202123;
-  --bg-accent-dark: #383c40;
+  /*Botones*/
+  --Btn-cancelar: #960018;
+  --Btn-primario: #212529;
 
-  /* Botones */
-  --bg-botonIcon: #212529;
+  /*Bordes*/
+  --Borde-tabla: #111315;
+  --Borde-suave: #e0e0e0;
 
-  /* Textos */
-  --text-primary: #1a1a1a;
-  --text-secondary: #666;
-  --text-tertiary: #888;
-  --text-muted: #9ca3af;
-  --text-light: #d1d5db;
-  --text-white: #ffffff;
-  --text-on-dark: #fcfcf7;
-  --text-placeholder: #6b7280;
-
-  /* Bordes */
-  --borde-tabla: #212529;
-  --border-medium: #d1d5db;
-  --border-dark: #9a9b9a;
-  --border-input: #d1d5db;
-
-  /* Estados */
-  --color-success: #10b981;
-  --color-warning: #f59e0b;
-  --color-error: #dc2626;
-  --color-info: #3b82f6;
-  --color-accent: #e47a6e;
-
-  /* Badges */
-  --badge-blue-bg: #dbeafe;
-  --badge-blue-text: #1e40af;
-  --badge-yellow-bg: #fef3c7;
-  --badge-yellow-text: #d97706;
-  --badge-purple-bg: #e0e7ff;
-  --badge-purple-text: #4338ca;
-  --badge-sky-bg: #f0f9ff;
-  --badge-sky-text: #0ea5e9;
-  --badge-indigo-bg: #e0e7ff;
-  --badge-indigo-text: #3730a3;
-
-  /* Sombras */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.08);
-  --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.12);
-  --shadow-custom: 2px 2px 2px 2px rgba(0, 0, 0, 0.25);
-
-  /* Scrollbar */
-  --scrollbar-track: #6a6b6a;
-  --scrollbar-thumb: #4a4b4a;
-  --scrollbar-thumb-hover: #3a3b3a;
-
-  /* hover */
-  --hover-tabla: #dcdcd7;
-  --hover-inbox: #4d4d4d;
+  /*Hover*/
+  --Hover-tabla: #DCDCD7;
+  --Hover-inbox: #4d4d4d;
+  --Hover-cancelar: #6a0314;
 
   /* seleccion */
   --seleccion-1: #acacac;
+  --seleccion-2: #7C7D7C;
 
-  /* Input */
-  --Input-Fondo: #ebebe8;
+  /*Input*/
+  --Input-Fondo: #EBEBE8;
+
+  /*Shadow*/
+  --shadow-custom: 2px 2px 2px 2px rgba(0,0,0,0.3);
 }
 
 /* Tema oscuro con todas las variables redefinidas */
 .dark-theme {
-  /* Colores principales */
-  --color-primary: #0d0d0d;
-  --color-primary-hover: #262626;
-  --color-primary-dark: #000000;
+  /*Fondos*/
+  --Fondo-pantalla: #111315;
+  --Fondo-elementos: #252628;
+  --Fondo-elementos2: #171819;
+  --Fondo-sidebar: #171819;
 
-  /* Fondos */
-  --bg-body: #1a1a1a;
-  --bg-elementos: #252628;
-  --bg-accent: #4a4a4a97;
-  --bg-barra: #171819;
-  --bg-dragdrp: #3a3d40;
+  /*Textos*/
+  --Texto-primario: #FCFCF7;
+  --Texto-segundo: #111315;
+  --Texto-tercero: #717376;
+  --Texto-blanco: #ffffff;
 
-  --bg-surface: #2e2e2e;
-  --bg-surface-secondary: #252525;
-  --bg-surface-tertiary: #2a2a2a;
-  --bg-input: #3a3a3a;
-  --bg-overlay: rgba(0, 0, 0, 0.7);
-  --bg-sidebar: #171819;
-  --bg-modal: #1f1f1f;
-  --bg-modal-secondary: #2a2a2a;
-  --bg-hover: #333333;
-  --bg-selected: #0a0a0a;
+  /*Botones*/
+  --Btn-cancelar: #960018;
+  --Btn-primario: #0E1012;
 
-  --bg-accent-dark: #2a2a2a;
+  /*Bordes*/
+  --Borde-tabla: #FCFCF7;
+  --Borde-suave: #e0e0e0;
 
-  /* Botones */
-  --bg-botonIcon: #fcfcf7;
-
-  /* Textos */
-  --text-primary: #e0e0e0;
-  --text-secondary: #b0b0b0;
-  --text-tertiary: #909090;
-  --text-muted: #707070;
-  --text-light: #606060;
-  --text-white: #ffffff;
-  --text-on-dark: #e0e0e0;
-  --text-placeholder: #808080;
-
-  /* Bordes */
-  --borde-tabla: #fcfcf7;
-  --border-medium: #404040;
-  --border-dark: #505050;
-  --border-input: #404040;
-
-  /* Estados - mantienen colores vibrantes */
-  --color-success: #10b981;
-  --color-warning: #f59e0b;
-  --color-error: #ef4444;
-  --color-info: #3b82f6;
-  --color-accent: #e47a6e;
-
-  /* Badges - versiones oscuras */
-  --badge-blue-bg: #1e3a5f;
-  --badge-blue-text: #93c5fd;
-  --badge-yellow-bg: #78350f;
-  --badge-yellow-text: #fcd34d;
-  --badge-purple-bg: #3730a3;
-  --badge-purple-text: #c7d2fe;
-  --badge-sky-bg: #0c4a6e;
-  --badge-sky-text: #7dd3fc;
-  --badge-indigo-bg: #312e81;
-  --badge-indigo-text: #a5b4fc;
-
-  /* Sombras */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
-  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.6);
-  --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.7);
-  --shadow-custom: 2px 2px 2px 2px rgba(0, 0, 0, 0.7);
-
-  /* Scrollbar */
-  --scrollbar-track: #2a2a2a;
-  --scrollbar-thumb: #404040;
-  --scrollbar-thumb-hover: #555555;
-
-  /* Hover */
-  --hover-tabla: #434343;
-  --hover-inbox: #2a2a2a;
+  /*Hover*/
+  --Hover-tabla: #434343;
+  --Hover-inbox: #2a2a2a;
 
   /* seleccion */
-  --seleccion-1: #1b1b1b;
+  --seleccion-1: #3e3e3e;
+  --seleccion-2: #7C7D7C;
 
-  /* Input */
-  --Input-Fondo: #3a3d43;
+  /*Input*/
+  --Input-Fondo: #404142;
+
+  /*Shadow*/
+  --shadow-custom: 2px 2px 2px 2px rgba(0,0,0,0.7);
 }
 
 .layout {
@@ -177,32 +79,43 @@
   display: grid;
   grid-template-areas: "sidebar body";
   grid-template-columns: auto 1fr;
-  gap: 8px;
-  background-color: var(--bg-body);
+  gap: 0;
+  background-color: var(--Fondo-pantalla);
 }
 
 .sidebar {
   grid-area: sidebar;
-  background-color: var(--bg-sidebar);
-  color: var(--text-white);
+  background-color: var(--Fondo-sidebar);
+  color: var(--Texto-blanco);
   height: 100vh;
   width: 200px;
   position: fixed;
   transition: background-color 0.3s ease;
+  margin: 0;
+  padding: 0;
+  left: 0;
+  top: 0;
 }
 
-.body {
+body {
   grid-area: body;
-  background-color: var(--bg-body);
-  color: var(--text-primary);
+  background-color: var(--Fondo-pantalla);
+  color: var(--Texto-blanco);
   margin-left: 200px;
   transition: background-color 0.3s ease, color 0.3s ease;
-  /* Added width: 100% and overflow handling to prevent white space */
   width: calc(100% - 200px);
-  min-height: 100vh;
+  height: 100vh;
+  overflow-x: hidden;
 }
 
 .sidebar-content {
-  background-color: var(--bg-sidebar);
+  background-color: var(--Fondo-sidebar);
   transition: background-color 0.3s ease;
+  margin: 0;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  height: 100%;
 }
+ 

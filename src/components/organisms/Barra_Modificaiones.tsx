@@ -88,10 +88,9 @@ export default function Barra_Modificaciones({
         </div>
 
         <div className="toolbar-right">
-          {/* Botones (sin cambios) */}
           <div className="toolbar-btn-wrapper">
             <button type="button" className="toolbar-btn" onClick={() => toggleMenu("asignados")}>
-              👥 Asignados
+              Asignados
               {changedFields.has("asignados") && (
                 <span
                   className="change-indicator"
@@ -107,7 +106,7 @@ export default function Barra_Modificaciones({
           </div>
           <div className="toolbar-btn-wrapper">
             <button type="button" className="toolbar-btn" onClick={() => toggleMenu("fechas")}>
-              📅 Fechas
+              Fechas
               {changedFields.has("fechas") && (
                 <span
                   className="change-indicator"
@@ -123,7 +122,7 @@ export default function Barra_Modificaciones({
           </div>
           <div className="toolbar-btn-wrapper">
             <button type="button" className="toolbar-btn" onClick={() => toggleMenu("prioridad")}>
-              🏳 Prioridad
+              Prioridad
               {changedFields.has("prioridad") && (
                 <span
                   className="change-indicator"
@@ -138,19 +137,18 @@ export default function Barra_Modificaciones({
             </button>
           </div>
           <button type="button" className="toolbar-btn delete-btn" onClick={() => toggleMenu("delete")}>
-            🗑 Eliminar
+            Eliminar
           </button>
           <button
             type="submit"
             className={`toolbar-btn accept-btn ${!hasChanges ? "disabled" : ""}`}
             disabled={!hasChanges}
           >
-            ✓ Aceptar
+            Aceptar
           </button>
         </div>
       </div>
 
-      {/* --- RENDERIZADO DE MENÚS (CORREGIDO) --- */}
       {openMenu === "asignados" && (
         <MenuAsignados
           usuarios={usuariosNoSeleccionados}

@@ -14,34 +14,43 @@ export default function AsignacionesRecibidas({
   asignacionSeleccionada,
   onSeleccionarAsignacion,
 }: AsignacionesRecibidasProps) {
-  const formatearFecha = (fecha: string) => {
-    const date = new Date(fecha)
-    return date.toLocaleDateString("es-ES", {
-      day: "2-digit",
-      month: "short",
-    })
-  }
- 
+
   return (
     <div className="asignaciones-recibidas">
       <div className="asignaciones-recibidas-titulo">Asignaciones recibidas</div>
       <div className="asignaciones-lista">
-        {asignaciones.map((asignacion) => (
-          <div
-            key={asignacion.id}
-            className={`asignacion-item ${asignacionSeleccionada === asignacion.id ? "seleccionada" : ""}`}
-            onClick={() => onSeleccionarAsignacion(asignacion.id)}
-          >
-            <div className="asignacion-autor">
-              <Icono_Perfil Nombre={asignacion.autor.nombre} color="#678933"/>
-              <span className="autor-nombre">{asignacion.autor.nombre}</span>
-            </div>
-            <div className="asignacion-contenido">
-              <h3 className="asignacion-titulo">{asignacion.titulo}</h3>
-              <span className="asignacion-fecha">{formatearFecha(asignacion.fecha_creacion)}</span>
-            </div>
+        {asignaciones.length === 0 ? (
+          <div className="asignaciones-vacio" style={{ padding: "2rem", textAlign: "center", color: "#999" }}>
+            <p>No has recibido asignaciones</p>
           </div>
-        ))}
+        ) : (
+          asignaciones.map((asignacion) => (
+            <div
+              key={asignacion.id}
+              className={`asignacion-item ${asignacionSeleccionada === asignacion.id ? "seleccionada" : ""}`}
+              onClick={() => onSeleccionarAsignacion(asignacion.id)}
+            >
+              <div className="asignacion-autor">
+                <div
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    console.log("[v0] Asignacion autor area clicked:", {
+                      autorId: asignacion.autor.id,
+                      autorNombre: asignacion.autor.nombre,
+                    })
+                  }}
+                  style={{ display: "flex", alignItems: "center", gap: "8px", cursor: "pointer" }}
+                >
+                  <Icono_Perfil Nombre={asignacion.autor.nombre} color="#678933" userId={asignacion.autor.id} />
+                  <span className="autor-nombre">{asignacion.autor.nombre}</span>
+                </div>
+              </div>
+              <div className="asignacion-contenido">
+                <h3 className="asignacion-titulo">{asignacion.titulo}</h3>
+              </div>
+            </div>
+          ))
+        )}
       </div>
     </div>
   )

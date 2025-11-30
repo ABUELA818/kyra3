@@ -2,7 +2,7 @@
 .Proyectos_Contenedor {
   padding-top: 20px;
   min-height: 100vh;
-  background-color: var(--bg-body);
+  background-color: var(--Fondo-pantalla);
   transition: background-color 0.3s ease;
 }
 
@@ -15,48 +15,29 @@
   padding-bottom: 16px;
   padding-right: 20px;
   padding-left: 10px;
-  border-bottom: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--Borde-tabla);
 }
 
 .Proyectos_Titulo h1 {
   font-size: 25px;
-  font-weight: 100;
-  color: var(--text-primary);
+  font-weight: 400;
+  color: var(--Texto-primario);
   margin: 0;
 }
- 
+
 .Btn_Crear_Proyecto {
-  background-color: #3a3d43;
+  background-color: var(--Btn-primario);
   border: none;
   border-radius: 20px;
   font-size: 14px;
   padding: 10px 20px;
-  color: var(--text-white);
+  color: var(--Texto-blanco);
   box-shadow: var(--shadow-custom);
   transition: 0.5s;
 }
- 
+
 .Btn_Crear_Proyecto:hover {
   scale: 1.1;
-}
-
-/* Botón Crear Asignación en el header */
-.Btn_Crear_Asignacion {
-  background-color: var(--color-primary);
-  border: none;
-  border-radius: 16px;
-  font-size: 13px;
-  padding: 8px 16px;
-  color: var(--text-white);
-  cursor: pointer;
-  transition: all 0.3s;
-  box-shadow: var(--shadow-sm);
-}
-
-.Btn_Crear_Asignacion:hover {
-  background-color: var(--color-primary-hover);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 /* Lista de proyectos */
@@ -68,7 +49,7 @@
 
 /* Tarjeta de proyecto */
 .Proyecto_Tarjeta {
-  background-color: var(--bg-elementos);
+  background-color: var(--Fondo-elementos);
   border-radius: 16px;
   box-shadow: var(--shadow-custom);
   overflow: hidden;
@@ -102,7 +83,7 @@
   background: none;
   border: none;
   font-size: 12px;
-  color: var(--text-secondary);
+  color: var(--Texto-primario);
   cursor: pointer;
   transition: transform 0.2s;
   padding: 4px;
@@ -112,47 +93,24 @@
   transform: rotate(180deg);
 }
 
-.btn-menu {
-  background: none;
-  border: none;
-  font-size: 20px;
-  color: var(--text-secondary);
-  cursor: pointer;
-  padding: 4px 8px;
-  line-height: 1;
-}
-
-.btn-menu:hover {
-  background-color: var(--bg-hover);
-  border-radius: 4px;
-}
-
 .Proyecto_Nombre {
   font-size: 20px;
-  font-weight: 100;
-  color: var(--text-primary);
+  font-weight: 300;
+  color: var(--Texto-primario);
   margin: 0;
 }
 
 .Proyecto_Tarjeta_Info {
   font-size: 14px;
-  color: var(--text-secondary);
+  color: var(--Texto-primario);
 }
 
 /* Estados */
-.estado-en-proceso {
-  color: var(--color-warning);
-  font-weight: 100;
-}
-
-.estado-terminado {
-  color: var(--color-success);
-  font-weight: 100;
-}
-
+.estado-en-proceso,
+.estado-terminado,
 .estado-pendiente {
-  color: var(--text-muted);
-  font-weight: 100;
+  color: var(--Texto-primario);
+  font-weight: 300;
 }
 
 /* Equipo y avatares */
@@ -171,13 +129,13 @@
 /* Contenido expandido del proyecto */
 .Proyecto_Tarjeta_Contenido {
   padding: 0 24px 20px 24px;
-  border-top: 1px solid var(--border-light);
+  border-top: 1px solid var(--Borde-tabla);
 }
 
 .Btn_Añadir_Asignaciones {
   background: none;
-  border: 1px dashed var(--border-medium);
-  color: var(--text-muted);
+  border: 1px dashed var(--Borde-tabla);
+  color: var(--Texto-primario);
   padding: 12px;
   width: 100%;
   border-radius: 20px;
@@ -188,12 +146,9 @@
 }
 
 .Btn_Añadir_Asignaciones:hover {
-  border-color: var(--border-dark);
-  color: var(--text-secondary);
-  background-color: var(--bg-hover);
+  background-color: var(--Hover-tabla);
 }
 
-/* Secciones de estado */
 .Seccion_Estado {
   margin-top: 16px;
 }
@@ -211,7 +166,7 @@
   background: none;
   border: none;
   font-size: 10px;
-  color: var(--text-secondary);
+  color: var(--Texto-primario);
   cursor: pointer;
   transition: transform 0.2s;
   padding: 4px;
@@ -223,13 +178,13 @@
 
 .Seccion_Titulo {
   font-size: 15px;
-  font-weight: 100;
-  color: var(--text-primary);
+  font-weight: 300;
+  color: var(--Texto-primario);
 }
 
 .Seccion_Contador {
   font-size: 14px;
-  color: var(--text-muted);
+  color: var(--Texto-primario);
   background-color: var(--bg-hover);
   padding: 2px 8px;
   border-radius: 12px;
@@ -241,7 +196,7 @@
 .Tabla_Asignaciones_Container {
   margin-top: 12px;
   padding: 16px;
-  background-color: var(--bg-surface-tertiary);
+  background-color: var(--Fondo-elementos);
   border-radius: 8px;
   transition: background-color 0.3s ease;
 }
@@ -266,12 +221,11 @@
 .prioridad-baja {
   color: var(--color-success);
 }
-
-/* Barra de selección */
+ 
 .Barra_Seleccion {
   position: fixed;
   bottom: 0px;
-  left: 200px; /* Alineado con el contenido (después del sidebar) */
+  left: 200px;
   right: 0;
   z-index: 100;
   width: 87%;
@@ -293,65 +247,9 @@
   border-radius: 50px;
 }
 
-.Seleccion_Info {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  color: var(--text-white);
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.Btn_Cerrar {
-  background: none;
-  border: none;
-  color: var(--text-white);
-  font-size: 18px;
-  cursor: pointer;
-  padding: 4px 8px;
-  line-height: 1;
-  opacity: 0.8;
-  transition: 0.5s;
-}
-
-.Btn_Cerrar:hover {
-  opacity: 1;
-  transform: rotate(180deg);
-  scale: 1.05;
-}
-
 .Seleccion_Acciones {
   display: flex;
   gap: 12px;
-}
-
-.Btn_Accion {
-  background-color: transparent;
-  border: none;
-  box-shadow: var(--shadow-custom);
-  color: var(--text-white);
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 14px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: 0.5s;
-}
-
-.Btn_Accion:hover {
-  background-color: var(--bg-overlay);
-  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
-}
-
-.btn-accion .icono {
-  font-size: 16px;
-}
-
-.btn-eliminar:hover {
-  background-color: rgba(220, 38, 38, 0.3);
-  border-color: rgba(220, 38, 38, 0.5);
 }
 
 /* Responsive */
@@ -390,8 +288,8 @@
 
 .Crear_Proyecto_Contenido {
   padding: 2rem;
-  color: var(--text-primary);
-  background-color: var(--bg-elementos);
+  color: var(--Texto-primario);
+  background-color: var(--Fondo-elementos);
   border-radius: 20px;
   width: 40%;
   max-height: 90vh;
@@ -413,9 +311,9 @@
 
 .Crear_Proyecto_Titulo h2 {
   margin: 0;
-  color: var(--text-primary);
+  color: var(--Texto-primario);
   font-size: 25px;
-  font-weight: 100;
+  font-weight: 400;
 }
 
 .Crear_Proyecto_Formulario {
@@ -426,20 +324,44 @@
 
 .Crear_Proyecto_Inputs {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 12px;
   padding-top: 20px;
+  position: relative;
 }
 
 .Crear_Proyecto_Inputs input {
-  width: 44.5%;
+  width: 95%;
   border-radius: 20px;
   padding: 10px 12px;
   font-size: 14px;
   border: none;
   background-color: var(--Input-Fondo);
-  color: var(--text-primary);
+  color: var(--Texto-primario);
   box-shadow: var(--shadow-custom);
   transition: background-color 0.3s ease;
+}
+
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.equipo-seleccionado-container {
+  margin-top: 12px;
+}
+
+.equipo-seleccionado {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background-color: var(--seleccion-1);
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--Texto-blanco);
 }
 
 .Crear_Proyecto_Fechas {
@@ -464,7 +386,7 @@
   border: none;
   background-color: var(--Input-Fondo);
   box-shadow: var(--shadow-custom);
-  color: var(--text-primary);
+  color: var(--Texto-primario);
   transition: background-color 0.3s ease;
 }
 
@@ -475,6 +397,14 @@
   width: 100%;
 }
 
+.boton-cancelarP {
+  background-color: var(--Btn-cancelar);
+}
+
+.boton-crearP {
+  background-color: var(--Btn-primario);
+}
+
 .Crear_Proyecto_Botones button {
   flex: 1;
   margin: 0 .25rem;
@@ -483,7 +413,6 @@
   padding: .6rem;
   color: #fff;
   cursor: pointer;
-  background-color: #3a3d43;
   box-shadow: var(--shadow-custom);
   transition: 0.5s;
 }
@@ -491,14 +420,18 @@
 .Crear_Proyecto_Botones button:hover {
   scale: 1.02;
 }
-/* Toolbar Container */
+
+.boton-cancelarP:hover {
+  background-color: var(--Hover-cancelar);
+}
+
 .toolbar-container {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  background: white;
+  background: var(--Fondo-elementos);
   border-top: 1px solid #e0e0e0;
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
   animation: slideUp 0.3s ease-out;
@@ -531,8 +464,8 @@
 }
 
 .selection-text {
-  font-weight: 600;
-  color: #333;
+  font-weight: 500;
+  color: var(--Texto-primario);
   font-size: 14px;
 }
 
@@ -541,20 +474,20 @@
   border: none;
   font-size: 24px;
   cursor: pointer;
-  color: #666;
+  color: var(--Texto-primario);
   padding: 0;
   width: 32px;
   height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
+  border-radius: 20px;
   transition: all 0.2s;
 }
 
 .close-btn:hover {
-  background-color: #f0f0f0;
-  color: #000;
+  background-color: var(--Hover-tabla);
+  transform: rotate(180deg);
 }
 
 .toolbar-right {
@@ -570,9 +503,9 @@
 }
 
 .toolbar-btn {
-  background-color: #f5f5f5;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  background-color: var(--Btn-primario);
+  border: none;
+  border-radius: 20px;
   padding: 8px 12px;
   cursor: pointer;
   font-size: 13px;
@@ -583,11 +516,12 @@
   gap: 6px;
   position: relative;
   white-space: nowrap;
+  color: var(--Texto-blanco);
+  box-shadow: var(--shadow-custom);
 }
 
 .toolbar-btn:hover:not(.disabled) {
-  background-color: #e8e8e8;
-  border-color: #999;
+  scale: 1.05;
 }
 
 .toolbar-btn:active:not(.disabled) {
@@ -595,14 +529,13 @@
 }
 
 .toolbar-btn.delete-btn {
-  background-color: #fee;
-  border-color: #fcc;
-  color: #d32f2f;
+  background-color: var(--Btn-cancelar);
+  border-color: none;
+  color: var(--Texto-blanco);
 }
 
 .toolbar-btn.delete-btn:hover {
-  background-color: #fdd;
-  border-color: #f99;
+  background-color: var(--Hover-cancelar);
 }
 
 .toolbar-btn.accept-btn {
@@ -640,15 +573,15 @@
 
 .change-indicator:hover {
   background-color: rgba(0, 0, 0, 0.2);
+  transform: rotate(180deg);
 }
 
-/* Menu Base Styles */
 .menu {
   position: absolute;
   bottom: 100%;
-  left: 0;
-  right: auto;
-  background: white;
+
+  right: 10px;
+  background: var(--Fondo-elementos);
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
@@ -675,22 +608,25 @@
 /* User Assignment Menu */
 .menu-assigned {
   min-width: 280px;
+  border-radius: 20px;
 }
 
 .search-input {
-  width: 100%;
+  width: 92%;
   padding: 8px 10px;
-  border: 1px solid #ddd;
+  border: none;
   border-radius: 4px;
   margin-bottom: 10px;
   font-size: 13px;
   font-family: inherit;
+  background-color: var(--Input-Fondo);
+  box-shadow: var(--shadow-custom);
+  border-radius: 20px;
+  color: var(--Texto-primario);
 }
 
 .search-input:focus {
   outline: none;
-  border-color: #4caf50;
-  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);
 }
 
 .user-list {
@@ -704,18 +640,19 @@
   align-items: center;
   gap: 10px;
   padding: 10px 12px;
-  border: 1px solid transparent;
-  background-color: #fafafa;
+  background-color: var(--Fondo-elementos);
   border-radius: 6px;
   cursor: pointer;
   font-size: 13px;
   transition: all 0.2s;
   text-align: left;
   border: none;
+  border-radius: 20px;
+  color: var(--Texto-primario);
 }
 
 .user-item:hover {
-  background-color: #f0f0f0;
+  background-color: var(--Hover-tabla);
 }
 
 .user-item.active {
@@ -759,17 +696,20 @@
 }
 
 .date-field label {
-  font-size: 12px;
-  font-weight: 600;
-  color: #333;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--Texto-primario);
 }
 
 .date-field input {
   padding: 8px 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border: none;
+  border-radius: 20px;
   font-size: 13px;
   font-family: inherit;
+  background-color: var(--Input-Fondo);
+  box-shadow: var(--shadow-custom);
+  color: var(--Texto-primario);
 }
 
 .date-field input:focus {
@@ -789,7 +729,7 @@
   gap: 10px;
   padding: 10px 12px;
   border: 1px solid transparent;
-  background-color: #fafafa;
+  background-color: var(--Input-Fondo);
   border-radius: 6px;
   cursor: pointer;
   font-size: 13px;
@@ -797,10 +737,14 @@
   width: 100%;
   text-align: left;
   border: none;
+  margin-top: 5px;
+  color: var(--Texto-primario);
+  border-radius: 20px;
 }
 
 .priority-item:hover {
-  background-color: #f0f0f0;
+  background-color: var(--Hover-tabla);
+  scale: 1.04;
 }
 
 .priority-item.active {
@@ -836,9 +780,9 @@
 
 .menu-delete p {
   margin: 0 0 16px 0;
-  font-size: 14px;
-  color: #333;
-  font-weight: 500;
+  font-size: 15px;
+  color: var(--Texto-primario);
+  font-weight: 400;
 }
 
 .delete-buttons {
@@ -850,32 +794,34 @@
 .delete-no,
 .delete-yes {
   padding: 8px 20px;
-  border: 1px solid #ddd;
+  border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 13px;
   font-weight: 500;
   transition: all 0.2s;
-  background-color: white;
+  color: var(--Texto-primario);
+  border-radius: 20px;
+}
+
+.delete-no {
+  background-color: var(--Btn-primario);
+  box-shadow: var(--shadow-custom);
 }
 
 .delete-no:hover {
-  background-color: #f5f5f5;
-  border-color: #999;
+  scale: 1.04;
 }
 
 .delete-yes {
-  background-color: #f44336;
-  color: white;
-  border-color: #d32f2f;
+  background-color: var(--Btn-cancelar);
 }
 
 .delete-yes:hover {
-  background-color: #e53935;
-  border-color: #c62828;
+  scale: 1.04;
+  background-color: var(--Hover-cancelar);
 }
 
-/* Added padding-bottom to body to account for fixed toolbar */
 body {
   padding-bottom: 80px;
 }
@@ -908,11 +854,6 @@ body {
   }
 }
 
-
-
-
-
-
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -923,7 +864,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2000;
+  z-index: 10000;
   animation: fadeIn 0.2s ease-out;
 }
 
@@ -937,14 +878,15 @@ body {
 }
 
 .modal-content {
-  background: white;
-  border-radius: 12px;
+  background: var(--Fondo-elementos);
+  border-radius: 20px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
   max-width: 800px;
   width: 90%;
   max-height: 90vh;
   overflow-y: auto;
   animation: slideIn 0.3s ease-out;
+  z-index: 10001;
 }
 
 @keyframes slideIn {
@@ -963,38 +905,36 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  border-bottom: 1px solid #e0e0e0;
-  sticky: top;
-  background: white;
+  border-bottom: none;
   z-index: 1;
 }
 
 .modal-titulo {
   margin: 0;
   font-size: 20px;
-  font-weight: 600;
-  color: #333;
+  font-weight: 400;
+  color: var(--Texto-primario);
 }
 
 .modal-close-btn {
   background: none;
   border: none;
+  border-radius: 20px;
   font-size: 28px;
   cursor: pointer;
-  color: #999;
+  color: var(--Texto-primario);
   padding: 0;
   width: 40px;
   height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
   transition: all 0.2s;
 }
 
 .modal-close-btn:hover {
-  background-color: #f0f0f0;
-  color: #333;
+  transform: rotate(180deg);
+  background-color: var(--Hover-tabla);
 }
 
 /* Add form styles for modal */
@@ -1019,17 +959,17 @@ body {
 
 .form-input {
   padding: 10px 12px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  border: none;
+  border-radius: 20px;
   font-size: 14px;
-  font-family: inherit;
   transition: all 0.2s;
+  background-color: var(--Input-Fondo);
+  box-shadow: var(--shadow-custom);
+  color: var(--Texto-primario);
 }
 
 .form-input:focus {
   outline: none;
-  border-color: #4caf50;
-  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);
 }
 
 .titulo-input {
@@ -1046,13 +986,56 @@ body {
   left: 0;
   right: 0;
   background: white;
-  border: 1px solid #ddd;
+  border: none;
   border-top: none;
-  border-radius: 0 0 6px 6px;
+  border-radius: 20px;
   max-height: 200px;
   overflow-y: auto;
   z-index: 10;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 4px;
+  background-color: var(--Fondo-elementos);
+}
+
+.dropdown-seccion-titulo {
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background-color: var(--bg-surface-tertiary);
+  border-bottom: 1px solid var(--border-light);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.equipo-opcion {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+  border-bottom: 1px solid var(--border-light);
+  background-color: var(--bg-elementos);
+  color: var(--text-primary);
+}
+
+.equipo-opcion:hover {
+  background-color: var(--bg-hover);
+}
+
+.equipo-opcion:last-child {
+  border-bottom: none;
+}
+
+.equipo-icono,
+.usuario-icono {
+  font-size: 16px;
+  flex-shrink: 0;
 }
 
 .usuario-opcion {
@@ -1064,10 +1047,16 @@ body {
   font-size: 14px;
   transition: all 0.2s;
   border-bottom: 1px solid #f0f0f0;
+  background-color: var(--bg-elementos);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .usuario-opcion:hover {
   background-color: #f5f5f5;
+  background-color: var(--bg-hover);
 }
 
 .usuario-opcion:last-child {
@@ -1108,41 +1097,41 @@ body {
 
 .form-textarea {
   padding: 10px 12px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  border: none;
+  border-radius: 20px;
   font-size: 14px;
   font-family: inherit;
   resize: vertical;
   transition: all 0.2s;
+  color: var(--Texto-primario);
+  background-color: var(--Input-Fondo);
+  width: 97%;
 }
 
 .form-textarea:focus {
   outline: none;
-  border-color: #4caf50;
-  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);
 }
 
 .form-label {
-  font-size: 13px;
-  font-weight: 600;
-  color: #333;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--Texto-primario);
 }
 
 .form-select {
   padding: 10px 12px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  border: none;
+  border-radius: 20px;
   font-size: 14px;
   font-family: inherit;
   transition: all 0.2s;
-  background-color: white;
+  background-color: var(--Input-Fondo);
   cursor: pointer;
+  width: 100%;
 }
 
 .form-select:focus {
   outline: none;
-  border-color: #4caf50;
-  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);
 }
 
 .form-grupo-inline {
@@ -1158,9 +1147,11 @@ body {
 .file-label {
   display: inline-block;
   padding: 10px 12px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  background-color: #f5f5f5;
+  border: none;
+  border-radius: 20px;
+  background-color: var(--Input-Fondo);
+  color: var(--Texto-primario);
+  box-shadow: var(--shadow-custom);
   cursor: pointer;
   font-size: 14px;
   text-align: center;
@@ -1168,8 +1159,7 @@ body {
 }
 
 .file-label:hover {
-  background-color: #efefef;
-  border-color: #999;
+  scale: 1.04;
 }
 
 .archivos-seleccionados {
@@ -1212,34 +1202,37 @@ body {
 
 .btn-cancelar {
   padding: 10px 20px;
-  border: 1px solid #ddd;
-  background-color: white;
-  border-radius: 6px;
+  border: none;
+  background-color: var(--Btn-cancelar);
+  border-radius: 20px;
   cursor: pointer;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
   transition: all 0.2s;
+  color: var(--Texto-blanco);
+  box-shadow: var(--shadow-custom);
 }
 
 .btn-cancelar:hover {
-  background-color: #f5f5f5;
-  border-color: #999;
+  background-color: var(--Hover-cancelar);
+  scale: 1.04;
 }
 
 .btn-asignar {
   padding: 10px 20px;
   border: none;
-  background-color: #4caf50;
-  color: white;
-  border-radius: 6px;
+  background-color: var(--Btn-primario);
+  color: var(--Texto-blanco);
+  border-radius: 20px;
   cursor: pointer;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
   transition: all 0.2s;
+  box-shadow: var(--shadow-custom);
 }
 
 .btn-asignar:hover {
-  background-color: #45a049;
+  scale: 1.04;
 }
 
 @media (max-width: 768px) {
@@ -1260,3 +1253,4 @@ body {
     width: 100% !important;
   }
 }
+ 

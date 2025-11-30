@@ -14,6 +14,7 @@ interface ProyectoCardProps {
   proyecto: ProyectoUI
   tareasSeleccionadas: string[]
   onSeleccionTarea: (tareaId: string) => void
+  debeExpandirse?: boolean
 }
 
 function formatearFecha(fechaISO: string): string {
@@ -21,7 +22,12 @@ function formatearFecha(fechaISO: string): string {
   return new Date(fechaISO).toLocaleDateString("es-ES", { day: "2-digit", month: "2-digit", year: "numeric" })
 }
 
-export default function ProyectoCard({ proyecto, tareasSeleccionadas, onSeleccionTarea }: ProyectoCardProps) {
+export default function ProyectoCard({
+  proyecto,
+  tareasSeleccionadas,
+  onSeleccionTarea,
+  debeExpandirse,
+}: ProyectoCardProps) {
   const [expandido, setExpandido] = useState(false)
   const [loadingAsignaciones, setLoadingAsignaciones] = useState(false)
   const [mostrarModalCrearAsignacion, setMostrarModalCrearAsignacion] = useState(false)
@@ -39,6 +45,12 @@ export default function ProyectoCard({ proyecto, tareasSeleccionadas, onSeleccio
   const [terminadosExpandido, setTerminadosExpandido] = useState(false)
 
   const { canCreateAssignment } = usePermissions()
+
+  useEffect(() => {
+    if (debeExpandirse && !expandido) {
+      setExpandido(true)
+    }
+  }, [debeExpandirse])
 
   const clasificarAsignaciones = (lista: ApiAsignacionProyecto[]) => {
     const listas = { asignaciones: [], enProceso: [], enviados: [], correcciones: [], terminados: [] } as Record<

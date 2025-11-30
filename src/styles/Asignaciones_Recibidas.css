@@ -1,23 +1,52 @@
-.Asignaciones_Recibidas_Titulo {
-    align-items: center;
-    font-size: 25px;
-}
-
 .Asignaciones_Recibidas_Inicio {
-    margin-top: 15px;
-    border-radius: 20px;
-    box-shadow: var(--shadow-custom);
-    padding-top: 15px;
-    padding-left: 15px;
-    width: 90%;
-    height: 100%;
-    background-color: var(--bg-elementos);
+  border-radius: 16px;
+  box-shadow: var(--shadow-custom);
+  padding: 20px;
+  width: 95%;
+  height: 100%;
+  background-color: var(--Fondo-elementos);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
 } 
 
+.Asignaciones_Recibidas_Titulo {
+  display: flex;
+  align-items: center;
+  font-size: clamp(18px, 2vw, 22px);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  color: var(--Texto-primario);
+}
+
 .texto {
-    margin: 0;
+  margin: 0;
 } 
 
 .Asignaciones_Recibidas_Contenido {
-    margin-left: -15px;
+  flex: 1;
+  overflow: hidden;
+  margin-top: 16px;
+}
+
+@media (max-width: 768px) {
+  .Asignaciones_Recibidas_Inicio {
+    padding: 16px;
+  }
+
+  .Asignaciones_Recibidas_Titulo {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .Asignaciones_Recibidas_Inicio {
+    padding: 14px;
+  }
+
+  .Asignaciones_Recibidas_Titulo {
+    font-size: 16px;
+  }
 }

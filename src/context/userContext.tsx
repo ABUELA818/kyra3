@@ -7,20 +7,23 @@ export interface Usuario {
   id: number
   email: string
   nombre?: string
+  color?: string
+  rol?: number
+  rol_nombre?: string
 }
 
 interface UserContextType {
   usuario: Usuario | null
   loading: boolean
   error: string | null
-  login: (email: string, password: string) => Promise<void>
+  login: (email: string, password: string) => Promise<boolean>
   logout: () => void
   isAuthenticated: boolean
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined)
 
-const API_URL = ""
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000/api"
 
 export function UserProvider({ children }: { children: ReactNode }) {
   const [usuario, setUsuario] = useState<Usuario | null>(null)
@@ -46,7 +49,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
         setLoading(true)
         setError(null)
 
-        const response = await fetch("/api/auth/login", {
+        const response = await fetch(`${API_URL}/usuarios/login`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email, password }),
@@ -54,7 +57,10 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
         if (!response.ok) {
           const errorData = await response.json()
-          throw new Error(errorData.message || "Error en el login")
+          const message = errorData.message || "Error en el login"
+          setError(message)
+          setLoading(false)
+          return false
         }
 
         const data = await response.json()
@@ -62,6 +68,9 @@ export function UserProvider({ children }: { children: ReactNode }) {
           id: data.id || data.usuario?.id,
           email: data.email || data.usuario?.email,
           nombre: data.nombre || data.usuario?.nombre,
+          color: data.color || data.usuario?.color || "#8B5A5A",
+          rol: data.rol || data.usuario?.rol || data.ID_Rol || data.usuario?.ID_Rol,
+          rol_nombre: data.rol_nombre || data.usuario?.rol_nombre || data.Rol || data.usuario?.Rol,
         }
 
         setUsuario(userData)
@@ -71,10 +80,11 @@ export function UserProvider({ children }: { children: ReactNode }) {
         }
 
         router.push("/Inicio")
+        return true
       } catch (err) {
         const message = err instanceof Error ? err.message : "Error desconocido"
         setError(message)
-        throw err
+        return false
       } finally {
         setLoading(false)
       }

@@ -1,56 +1,101 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import "@/styles/Chats.css"
 import ChatsRecibidos from "@/components/organisms/Chats_Recibidos"
-import type { Conversacion } from "@/types/Chats"
-
-const chatsEjemplo: Conversacion[] = [
-  {
-    id: "1",
-    participante: {
-      id: "user-1",
-      nombre: "Manuel Reyes",
-      avatar: undefined,
-      color: "#3b82f6"
-    },
-    ultimoMensaje: "Perfecto, lo reviso y te comento...",
-    timestamp: "2025-10-03T10:30:00Z",
-  },
-  {
-    id: "2",
-    participante: {
-      id: "user-2",
-      nombre: "Fernanda López",
-      avatar: undefined,
-      color: "#ef4444"
-    },
-    ultimoMensaje: "Ya están listos los diseños para el proyecto.",
-    timestamp: "2025-10-03T09:15:00Z",
-  },
-  {
-    id: "3",
-    participante: {
-      id: "user-3",
-      nombre: "Equipo de Diseño",
-      avatar: undefined,
-      color: "#10b981"
-    },
-    ultimoMensaje: "Recuerden la reunión de hoy a las 4 PM.",
-    timestamp: "2025-10-02T15:00:00Z",
-  }
-];
+import ChatMensajes from "@/components/organisms/Chat-Mensajes"
+import type { Conversacion, Participante } from "@/types/Chats"
+import { useUser } from "@/context/userContext"
+import { obtenerConversaciones, crearConversacion } from "@/services/Chats.service"
 
 export default function ChatsPage() {
-  const [conversaciones, setConversaciones] = useState<Conversacion[]>(chatsEjemplo)
-  const [chatSeleccionadoId, setChatSeleccionadoId] = useState<string | null>("1")
-  const [terminoBusqueda, setTerminoBusqueda] = useState("");
+  const { usuario } = useUser()
+  const [conversaciones, setConversaciones] = useState<Conversacion[]>([])
+  const [chatSeleccionadoId, setChatSeleccionadoId] = useState<string | null>(null)
+  const [terminoBusqueda, setTerminoBusqueda] = useState("")
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchChats = async () => {
+      if (!usuario?.id) {
+        setLoading(false)
+        return
+      }
+
+      try {
+        setLoading(true)
+        const data = await obtenerConversaciones(usuario.id)
+        setConversaciones(data)
+        setChatSeleccionadoId(null)
+      } catch (error) {
+        console.error("Error al cargar chats:", error)
+        setConversaciones([])
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchChats()
+  }, [usuario?.id])
 
   const chatActual = conversaciones.find((c) => c.id === chatSeleccionadoId)
 
-  const conversacionesFiltradas = conversaciones.filter(chat => 
-    chat.participante.nombre.toLowerCase().includes(terminoBusqueda.toLowerCase())
-  );
+  const conversacionesFiltradas = conversaciones.filter((chat) => {
+    if (!chat?.participante?.nombre) return false
+    return chat.participante.nombre.toLowerCase().includes(terminoBusqueda.toLowerCase())
+  })
+
+  const handleNuevaConversacion = async (participante: Participante) => {
+    if (!usuario?.id) return
+
+    try {
+      const nuevaConversacion = await crearConversacion(usuario.id, participante.id)
+
+      const conversacionNueva: Conversacion = {
+        id: nuevaConversacion.id,
+        participante: participante,
+        ultimoMensaje: "Conversación iniciada",
+        timestamp: new Date().toISOString(),
+      }
+
+      setConversaciones([conversacionNueva, ...conversaciones])
+      setChatSeleccionadoId(nuevaConversacion.id)
+      setTerminoBusqueda("")
+    } catch (error) {
+      console.error("Error al crear conversación:", error)
+    }
+  }
+
+  const handleMensajeEnviado = (conversacionId: string, nuevoMensaje: string, timestamp: string) => {
+    setConversaciones((prev) => {
+      const chatIndex = prev.findIndex((c) => c.id === conversacionId)
+      if (chatIndex === -1) return prev
+
+      const chat = prev[chatIndex]
+      const chatActualizado: Conversacion = {
+        ...chat,
+        ultimoMensaje: nuevoMensaje,
+        timestamp: timestamp,
+      }
+
+      // Remove the chat from its current position and add it to the top
+      const nuevasConversaciones = prev.filter((_, i) => i !== chatIndex)
+      return [chatActualizado, ...nuevasConversaciones]
+    })
+  }
+
+  if (loading) {
+    return (
+      <div className="Chats_Contenedor">
+        <div className="Chats_Contenido">
+          <div className="Mensajes_Recibidos">
+            <div className="Mensajes_Recibidos_Titulo">Chats</div>
+            <p style={{ padding: "20px", textAlign: "center", color: "#666" }}>Cargando chats...</p>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="Chats_Contenedor">
@@ -61,15 +106,20 @@ export default function ChatsPage() {
           onSeleccionarConversacion={setChatSeleccionadoId}
           valorBusqueda={terminoBusqueda}
           onBusquedaChange={setTerminoBusqueda}
+          usuarioActualId={usuario?.id || ""}
+          onNuevaConversacion={handleNuevaConversacion}
         />
 
         <div className="Chat_Principal">
           <div className="Chat_Vista_Mensajes">
-            {chatActual ? (
-              <div>
-                <h2>Mensajes con {chatActual.participante.nombre}</h2>
-                {/* Aquí iría el componente que renderiza los mensajes */}
-              </div>
+            {chatActual && usuario ? (
+              <ChatMensajes
+                conversacionId={chatActual.id}
+                participante={chatActual.participante}
+                usuarioActualId={usuario.id}
+                usuarioActualNombre={usuario.nombre}
+                onMensajeEnviado={handleMensajeEnviado}
+              />
             ) : (
               <div className="Sin_Seleccion">
                 <p>Selecciona una conversación para ver los mensajes</p>
@@ -81,4 +131,3 @@ export default function ChatsPage() {
     </div>
   )
 }
-

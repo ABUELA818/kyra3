@@ -1,16 +1,41 @@
+/* Modern progress bar with better visual design */
 .progress-bar {
-    background-color: #e5e7eb;
-    border-radius: 4px;
-    height: 6px;
-    width: 60px;
-    position: relative;
-    display: inline-block;
-    margin-right: 8px;
+  background-color: rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  height: 8px;
+  width: 80px;
+  position: relative;
+  display: inline-block;
+  margin-right: 10px;
+  overflow: hidden;
 }
 
+/* Animated fill with gradient for visual appeal */
 .progress-fill {
-    background-color: #10b981;
-    height: 100%;
-    border-radius: 4px;
-    width: 47%;
+  background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+  height: 100%;
+  border-radius: 8px;
+  transition: width 0.5s ease;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.3);
+}
+
+.progress-text {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--Texto-primario);
+  min-width: 35px;
+  display: inline-block;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .progress-bar {
+    width: 60px;
+    height: 6px;
+  }
+
+  .progress-text {
+    font-size: 12px;
+    min-width: 30px;
+  }
 }

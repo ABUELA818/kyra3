@@ -22,8 +22,6 @@ import type { AsignacionRecibidas } from "@/types/Asignaciones"
 export default function Inicio() {
   const { usuario } = useUser()
 
-  console.log(usuario?.id);
-
   const [proyectos, setProyectos] = useState<Proyecto[]>([])
   const [notas, setNotas] = useState<Nota[]>([])
   const [asignaciones, setAsignaciones] = useState<AsignacionRecibidas[]>([])
@@ -67,9 +65,9 @@ export default function Inicio() {
   const datos = proyectos.map((proyecto) => [
     <TextLink
       key={proyecto.ID_Proyecto}
-      href={`/proyecto/${proyecto.ID_Proyecto}`}
+      href={`/Proyectos?proyecto=${proyecto.ID_Proyecto}`}
       Texto={proyecto.Nombre_Proyecto}
-      color="#000000ff"
+      color= "var(--Texto-primario)"
       TamañoLetra={15}
     />,
     `${proyecto.numero_asignaciones} tareas`,
@@ -102,7 +100,7 @@ export default function Inicio() {
         {proyectos.length === 0 ? (
           <div style={{ padding: "2rem", textAlign: "center", color: "#666" }}>No tienes proyectos</div>
         ) : (
-          <Tabla columnas={columnas} datos={datos} TletraDatos={15} TletraEncabezado={20} AlturaMaxima={30} />
+          <Tabla columnas={columnas} datos={datos} TletraDatos={15} TletraEncabezado={20} AlturaMaxima={40} />
         )}
       </div>
     </div>

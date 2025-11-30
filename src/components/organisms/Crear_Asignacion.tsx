@@ -1,31 +1,61 @@
 "use client"
 import type React from "react"
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import type { NuevaAsignacion } from "@/types/Asignaciones"
 
 interface CrearAsignacionProps {
   onCrearAsignacion: (asignacion: NuevaAsignacion) => void
   usuarios: Array<{ id: string; nombre: string }>
 }
- 
-export default function CrearAsignacion({ onCrearAsignacion, usuarios }: CrearAsignacionProps) {
-  const [formData, setFormData] = useState<NuevaAsignacion>({
-    titulo: "",
-    descripcion: "",
-    prioridad: "Media",
-    fecha_inicio: "",
-    fecha_termino: "",
-    asignados: [],
-    archivos: [],
+
+export default function CrearAsignacion({ onCrearAsignacion, usuarios = [] }: CrearAsignacionProps) {
+  const [formData, setFormData] = useState<NuevaAsignacion>(() => {
+    const now = new Date()
+    const year = now.getFullYear()
+    const month = String(now.getMonth() + 1).padStart(2, "0")
+    const day = String(now.getDate()).padStart(2, "0")
+    const defaultDate = `${year}-${month}-${day}`
+
+    return {
+      titulo: "",
+      descripcion: "",
+      prioridad: "Media",
+      fecha_inicio: defaultDate,
+      fecha_termino: "",
+      asignados: [],
+      archivos: [],
+    }
   })
- 
+
   const [usuariosBusqueda, setUsuariosBusqueda] = useState("")
   const [mostrarUsuarios, setMostrarUsuarios] = useState(false)
   const [archivosSeleccionados, setArchivosSeleccionados] = useState<File[]>([])
 
-  const usuariosFiltrados = usuarios.filter(
+  const dropdownRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setMostrarUsuarios(false)
+      }
+    }
+
+    if (mostrarUsuarios) {
+      document.addEventListener("mousedown", handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [mostrarUsuarios])
+
+  const usuariosFiltrados = (usuarios || []).filter(
     (usuario) =>
-      usuario.nombre.toLowerCase().includes(usuariosBusqueda.toLowerCase()) && !formData.asignados.includes(usuario.id),
+      usuario &&
+      usuario.id &&
+      usuario.nombre &&
+      usuario.nombre.toLowerCase().includes(usuariosBusqueda.toLowerCase()) &&
+      !formData.asignados.includes(usuario.id),
   )
 
   const agregarUsuario = (usuarioId: string) => {
@@ -64,20 +94,55 @@ export default function CrearAsignacion({ onCrearAsignacion, usuarios }: CrearAs
 
   const manejarEnvio = (e: React.FormEvent) => {
     e.preventDefault()
-    if (formData.titulo && formData.descripcion && formData.fecha_inicio && formData.fecha_termino) {
-      onCrearAsignacion(formData)
-      // Resetear formulario
-      setFormData({
-        titulo: "",
-        descripcion: "",
-        prioridad: "Media",
-        fecha_inicio: "",
-        fecha_termino: "",
-        asignados: [],
-        archivos: [],
-      })
-      setArchivosSeleccionados([])
+
+    if (!formData.titulo || !formData.descripcion || !formData.fecha_inicio || !formData.fecha_termino) {
+      alert("Por favor completa todos los campos obligatorios")
+      return
     }
+
+    if (formData.asignados.length === 0) {
+      alert("Debes asignar al menos un usuario")
+      return
+    }
+
+    onCrearAsignacion(formData)
+    setFormData({
+      titulo: "",
+      descripcion: "",
+      prioridad: "Media",
+      fecha_inicio: "",
+      fecha_termino: "",
+      asignados: [],
+      archivos: [],
+    })
+    setArchivosSeleccionados([])
+  }
+
+  const handleCancelar = () => {
+    const now = new Date()
+    const year = now.getFullYear()
+    const month = String(now.getMonth() + 1).padStart(2, "0")
+    const day = String(now.getDate()).padStart(2, "0")
+    const defaultDate = `${year}-${month}-${day}`
+
+    setFormData({
+      titulo: "",
+      descripcion: "",
+      prioridad: "Media",
+      fecha_inicio: defaultDate,
+      fecha_termino: "",
+      asignados: [],
+      archivos: [],
+    })
+    setArchivosSeleccionados([])
+    setUsuariosBusqueda("")
+    setMostrarUsuarios(false)
+  }
+
+  const handleUsuariosInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const valor = e.target.value
+    setUsuariosBusqueda(valor)
+    setMostrarUsuarios(valor.length > 0 || usuarios.length > 0)
   }
 
   return (
@@ -93,36 +158,62 @@ export default function CrearAsignacion({ onCrearAsignacion, usuarios }: CrearAs
               onChange={(e) => setFormData((prev) => ({ ...prev, titulo: e.target.value }))}
               className="form-input titulo-input"
               required
-              style={{width:"49%"}}
+              style={{ width: "49%" }}
             />
 
             <input
               type="text"
               placeholder="Buscar usuarios"
               value={usuariosBusqueda}
-              onChange={(e) => {
-                setUsuariosBusqueda(e.target.value)
-                setMostrarUsuarios(e.target.value.length > 0)
+              onChange={handleUsuariosInput}
+              onFocus={() => {
+                setMostrarUsuarios(true)
               }}
               className="form-input"
-              style={{width:"49%"}}
+              style={{ width: "49%" }}
             />
-
           </div>
         </div>
-
         <div className="form-grupo">
-          <div className="buscar-usuarios-container">
-            
+          <div className="buscar-usuarios-container" ref={dropdownRef}>
             {mostrarUsuarios && usuariosFiltrados.length > 0 && (
               <div className="usuarios-dropdown">
                 {usuariosFiltrados.map((usuario) => (
-                  <div key={usuario.id} className="usuario-opcion" onClick={() => agregarUsuario(usuario.id)}>
+                  <div
+                    key={`usuario-${usuario.id}`}
+                    className="usuario-opcion"
+                    onClick={() => agregarUsuario(usuario.id)}
+                  >
                     {usuario.nombre}
                   </div>
                 ))}
               </div>
             )}
+            {mostrarUsuarios && usuariosFiltrados.length === 0 && usuariosBusqueda.length > 0 && (
+              <div className="usuarios-dropdown">
+                <div className="usuario-opcion" style={{ color: "#999" }}>
+                  No se encontraron usuarios
+                </div>
+              </div>
+            )}
+            {mostrarUsuarios &&
+              usuariosFiltrados.length === 0 &&
+              usuariosBusqueda.length === 0 &&
+              usuarios.length > 0 && (
+                <div className="usuarios-dropdown">
+                  {usuarios
+                    .filter((u) => u && u.id && u.nombre)
+                    .map((usuario) => (
+                      <div
+                        key={`usuario-${usuario.id}`}
+                        className="usuario-opcion"
+                        onClick={() => agregarUsuario(usuario.id)}
+                      >
+                        {usuario.nombre}
+                      </div>
+                    ))}
+                </div>
+              )}
           </div>
         </div>
 
@@ -131,7 +222,7 @@ export default function CrearAsignacion({ onCrearAsignacion, usuarios }: CrearAs
             {formData.asignados.map((usuarioId) => {
               const usuario = usuarios.find((u) => u.id === usuarioId)
               return usuario ? (
-                <div key={usuarioId} className="usuario-seleccionado">
+                <div key={`seleccionado-${usuarioId}`} className="usuario-seleccionado">
                   <span>{usuario.nombre}</span>
                   <button type="button" onClick={() => removerUsuario(usuarioId)} className="remover-usuario">
                     ×
@@ -170,17 +261,6 @@ export default function CrearAsignacion({ onCrearAsignacion, usuarios }: CrearAs
           </div>
 
           <div className="form-grupo">
-            <label className="form-label">Fecha de inicio</label>
-            <input
-              type="date"
-              value={formData.fecha_inicio}
-              onChange={(e) => setFormData((prev) => ({ ...prev, fecha_inicio: e.target.value }))}
-              className="form-input"
-              required
-            />
-          </div>
-
-          <div className="form-grupo">
             <label className="form-label">Fecha de entrega</label>
             <input
               type="date"
@@ -203,7 +283,7 @@ export default function CrearAsignacion({ onCrearAsignacion, usuarios }: CrearAs
         {archivosSeleccionados.length > 0 && (
           <div className="archivos-seleccionados">
             {archivosSeleccionados.map((archivo, index) => (
-              <div key={index} className="archivo-seleccionado">
+              <div key={`archivo-${index}-${archivo.name}`} className="archivo-seleccionado">
                 <span>{archivo.name}</span>
                 <button type="button" onClick={() => removerArchivo(index)} className="remover-archivo">
                   ×
@@ -214,7 +294,7 @@ export default function CrearAsignacion({ onCrearAsignacion, usuarios }: CrearAs
         )}
 
         <div className="form-acciones">
-          <button type="button" className="btn-cancelar">
+          <button type="button" className="btn-cancelar" onClick={handleCancelar}>
             Cancelar
           </button>
           <button type="submit" className="btn-asignar">

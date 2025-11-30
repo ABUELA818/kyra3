@@ -1,102 +1,127 @@
-import { Equipo } from "@/types/Equipos";
+import type { Equipo, MiembroEquipo } from "@/types/Equipos"
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000/api";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000/api"
 
 /**
  * Obtiene todos los equipos en los que un usuario es miembro o creador.
  */
 export const getEquiposByUsuario = async (idUsuario: number): Promise<Equipo[]> => {
   try {
-    const response = await fetch(`${API_URL}/equipos/usuario/${idUsuario}`);
+    const response = await fetch(`${API_URL}/equipos/usuario/${idUsuario}`)
     if (!response.ok) {
-      throw new Error("Error al obtener los equipos del usuario");
+      throw new Error("Error al obtener los equipos del usuario")
     }
-    return await response.json();
+    return await response.json()
   } catch (error) {
-    console.error(error);
-    return [];
+    console.error(error)
+    return []
   }
-};
+}
+
+/**
+ * Obtiene los detalles de un equipo específico por su ID.
+ */
+export const getEquipoById = async (idEquipo: number): Promise<Equipo> => {
+  try {
+    const response = await fetch(`${API_URL}/equipos/${idEquipo}`)
+    if (!response.ok) {
+      throw new Error("Error al obtener los detalles del equipo")
+    }
+    return await response.json()
+  } catch (error) {
+    console.error(error)
+    throw error
+  }
+}
 
 /**
  * Crea un nuevo equipo.
  */
-export const createEquipo = async (datos: { Nombre_Equipo: string; ID_Usuario_Creador: number; miembros: number[] }) => {
+export const createEquipo = async (datos: {
+  Nombre_Equipo: string
+  ID_Usuario_Creador: number
+  miembros: number[]
+}) => {
   const response = await fetch(`${API_URL}/equipos`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(datos),
-  });
+  })
   if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.message || 'Error al crear el equipo');
+    const errorData = await response.json()
+    throw new Error(errorData.message || "Error al crear el equipo")
   }
-  return await response.json();
-};
-
-
-import { MiembroEquipo, NuevoEquipo } from "@/types/Equipos";
+  return await response.json()
+}
 
 /**
  * Obtiene la lista de todos los miembros de un equipo específico.
  */
 export const getMiembrosDeEquipo = async (idEquipo: number): Promise<MiembroEquipo[]> => {
   try {
-    const response = await fetch(`${API_URL}/equipos/${idEquipo}/miembros`);
+    const response = await fetch(`${API_URL}/equipos/${idEquipo}/miembros`)
     if (!response.ok) {
-      throw new Error(`Error al obtener los miembros: ${response.status} ${response.statusText}`);
+      throw new Error(`Error al obtener los miembros: ${response.status} ${response.statusText}`)
     }
-    return await response.json();
+    return await response.json()
   } catch (error) {
-    console.error(error);
-    return [];
+    console.error(error)
+    return []
   }
-};
+}
 
 /**
  * Actualiza el rol de un miembro en un equipo.
  */
-export const updateRolMiembro = async (idEquipo: number, idUsuario: number, nuevo_rol: string) => {
+export const updateRolMiembro = async (
+  idEquipo: number,
+  idUsuario: number,
+  nuevo_rol: string,
+  idUsuarioActual: number,
+) => {
   const response = await fetch(`${API_URL}/equipos/${idEquipo}/miembros/${idUsuario}`, {
-    method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ nuevo_rol }),
-  });
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ nuevo_rol, ID_Usuario_Actual: idUsuarioActual }),
+  })
   if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.message || 'Error al actualizar el rol');
+    const errorData = await response.json()
+    throw new Error(errorData.message || "Error al actualizar el rol")
   }
-  return await response.json();
-};
+  return await response.json()
+}
 
-export const deleteMiembroDeEquipo = async (idEquipo: number, idUsuario: number) => {
-  const response = await fetch(`${API_URL}/equipos/${idEquipo}/miembros/${idUsuario}`, {
-    method: 'DELETE',
-  });
+export const deleteMiembroDeEquipo = async (idEquipo: number, idUsuario: number, idUsuarioActual: number) => {
+  const response = await fetch(
+    `${API_URL}/equipos/${idEquipo}/miembros/${idUsuario}?ID_Usuario_Actual=${idUsuarioActual}`,
+    {
+      method: "DELETE",
+    },
+  )
   if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.message || 'Error al eliminar al miembro');
+    const errorData = await response.json()
+    throw new Error(errorData.message || "Error al eliminar al miembro")
   }
-  return await response.json();
-};
+  return await response.json()
+}
 
 export const addMiembroToEquipo = async (idEquipo: number, idUsuario: number) => {
   try {
     const response = await fetch(`${API_URL}/equipos/${idEquipo}/miembros`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ID_Usuario: idUsuario }), // El backend espera recibir { ID_Usuario } en el body
-    });
+    })
 
     if (!response.ok) {
       // Si la API devuelve un error (ej: el usuario ya es miembro), lo capturamos aquí.
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'Error al añadir al miembro');
+      const errorData = await response.json()
+      throw new Error(errorData.message || "Error al añadir al miembro")
     }
 
-    return await response.json();
+    return await response.json()
   } catch (error) {
-    console.error("Error en el servicio addMiembroToEquipo:", error);
-    throw error; // Relanzamos el error para que el componente que lo llama pueda manejarlo.
+    console.error("Error en el servicio addMiembroToEquipo:", error)
+    throw error // Relanzamos el error para que el componente que lo llama pueda manejarlo.
   }
-};
+}

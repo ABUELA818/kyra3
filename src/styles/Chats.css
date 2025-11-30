@@ -1,11 +1,11 @@
 .Chats_Contenedor {
   display: flex;
-  background-color: var(--bg-body);
+  background-color: var(--Fondo-pantalla);
   height: 100vh;
   transition: background-color 0.3s ease;
   margin-left: -8px;
 }
- 
+  
 .Chats_Contenido {
   display: flex;
   flex: 1;
@@ -16,8 +16,8 @@
 .Mensajes_Recibidos {
   width: 30%;
   min-width: 280px;
-  background-color: var(--bg-elementos);
-  color: var(--text-primary);
+  background-color: var(--Fondo-elementos);
+  color: var(--Texto-primario);
   margin: 10px 10px;
   border-radius: 20px;
   box-shadow: var(--shadow-custom);
@@ -33,8 +33,8 @@
   padding: 30px 0 20px 0;
   margin: 0;
   font-size: 25px;
-  font-weight: 100;
-  border-bottom: 1px solid var(--borde-tabla);
+  font-weight: 400;
+  border-bottom: 1px solid var(--Borde-tabla);
 }
  
 .Input_Busqueda_Contenedor {
@@ -49,14 +49,14 @@
   border-radius: 20px;
   border: none;
   background-color: var(--Input-Fondo);
-  color: var(--text-primary);
+  color: var(--Texto-primario);
   box-shadow: var(--shadow-custom);
   font-size: 14px;
   transition: background-color 0.3s ease;
 }
 
 .Input_Busqueda::placeholder {
-  color: var(--text-tertiary);
+  color: var(--Texto-tercero);
 }
 
 .Input_Busqueda:focus {
@@ -71,13 +71,13 @@
 
 .Chat_Item {
   padding: 16px 20px;
-  border-bottom: 0.5px solid var(--borde-tabla);
+  border-bottom: 0.5px solid var(--Borde-tabla);
   cursor: pointer;
   transition: background-color 0.2s;
 }
 
 .Chat_Item:hover {
-  background-color: var(--hover-tabla);
+  background-color: var(--Hover-tabla);
 }
 
 .Chat_Item.seleccionada {
@@ -110,8 +110,6 @@
   margin: 0;
   flex: 1;
   line-height: 1.4;
-
-  /* Evita que el texto se desborde */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -119,16 +117,15 @@
 
 .Mensaje_Fecha {
   font-size: 12px;
-  color: var(--text-light);
+  color: var(--Texto-tercero);
   white-space: nowrap;
 }
 
-/* Área principal donde se ven los mensajes */
 .Chat_Principal {
   flex: 1;
   display: flex;
   flex-direction: column;
-  background-color: var(--bg-body);
+  background-color: var(--Fondo-pantalla);
   height: 100%;
   transition: background-color 0.3s ease;
 }
@@ -144,6 +141,7 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  color: var(--text-muted);
+  color: var(--Texto-tercero);
   font-size: 16px;
 }
+ 

@@ -6,12 +6,13 @@ import { useRouter, usePathname } from "next/navigation"
 import { useUser } from "@/context/userContext"
 import SideBar from "@/components/organisms/SideBar"
 import Inbox from "@/components/organisms/Inbox"
+import UserMenu from "@/components/organisms/UserMenu"
 import { useInbox } from "@/context/inbox-context"
 
-export function ProtectedRoute({ children }: { children: React.ReactNode }) {
+export function ProtectedRoute({ children, notifications = [] }: { children: React.ReactNode; notifications?: any[] }) {
   const router = useRouter()
   const pathname = usePathname()
-  const { isAuthenticated, loading } = useUser()
+  const { isAuthenticated, loading, usuario } = useUser()
   const { isOpen } = useInbox()
 
   const isLoginPage = pathname === "/login"
@@ -55,14 +56,16 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div style={{ display: "flex", width: "100%" }}>
+    <div style={{ display: "flex", width: "100%"}}>
       <div className="sidebar">
         <SideBar />
       </div>
-      <div className="body" style={{ flex: 1, width: "100%", overflow: "auto" }}>
+      <div className="body" style={{ flex: 1, width: "100%", overflow: "hidden"}}>
         {children}
-        <Inbox initialNotifications={[]} />
+        <Inbox initialNotifications={notifications} />
+        <UserMenu />
       </div>
     </div>
   )
 }
+  

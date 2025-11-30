@@ -2,41 +2,103 @@
 .Contenedor_Pagina_Inicio {
   display: flex;
   flex-direction: column;
-  background-color: var(--bg-body);
-  height: 100vh;
+  background-color: var(--Fondo-pantalla);
+  min-height: 100vh;
   margin-left: -8px;
+  padding: 24px 32px;
+  transition: background-color 0.3s ease;
+  gap: 24px;
 }
-
+ 
 /* Sección superior que agrupa Notas y Asignaciones */
 .Seccion_Superior_Inicio {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   width: 100%;
-  height: 55vh;
-  margin-bottom: 20px;
+  gap: 24px;
+  padding-right: 30px;
 }
 
+/* Removed fixed height, using min-height for better responsiveness */
 /* Contenedor específico para el componente de Notas */
-.Contenedor_Notas_Inicio {
-  width: 40%;
-}
-
-/* Contenedor específico para el componente de Asignaciones Recibidas */
+.Contenedor_Notas_Inicio,
 .Contenedor_Asignaciones_Inicio {
-  width: 50%;
-  height: 50vh;
+  width: 100%;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
 }
-
+ 
 /* Sección inferior que contiene la tabla principal */
 .Seccion_Inferior_Inicio {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  width: 100%; 
-} 
+  width: 100%;
+  gap: 16px;
+}
 
+/* Improved typography with better weight and spacing */
 .Seccion_Inferior_Inicio h1 {
-  font-weight: 100;
-  font-size: 25px;
-  padding-left: 20px;
+  font-weight: 300;
+  font-size: clamp(20px, 3vw, 28px);
+  padding-left: 8px;
+  margin: 0;
+  color: var(--Texto-primario);
+  letter-spacing: -0.02em;
+}
+
+/* Tablet responsiveness - better breakpoint handling */
+@media (max-width: 1024px) {
+  .Contenedor_Pagina_Inicio {
+    padding: 20px 24px;
+    gap: 20px;
+  }
+
+  .Seccion_Superior_Inicio {
+    gap: 20px;
+    padding-right: 20px;
+  }
+
+  .Contenedor_Notas_Inicio,
+  .Contenedor_Asignaciones_Inicio {
+    min-height: 380px;
+  }
+}
+
+/* Mobile responsiveness - stacks cards vertically */
+@media (max-width: 768px) {
+  .Contenedor_Pagina_Inicio {
+    padding: 16px;
+    margin-left: 0;
+    gap: 16px;
+  }
+
+  .Seccion_Superior_Inicio {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding-right: 0;
+  }
+
+  .Contenedor_Notas_Inicio,
+  .Contenedor_Asignaciones_Inicio {
+    width: 100%;
+    min-height: 320px;
+  }
+}
+
+/* Small mobile optimization */
+@media (max-width: 480px) {
+  .Contenedor_Pagina_Inicio {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .Seccion_Superior_Inicio {
+    gap: 12px;
+  }
+
+  .Contenedor_Notas_Inicio,
+  .Contenedor_Asignaciones_Inicio {
+    min-height: 280px;
+  }
 }

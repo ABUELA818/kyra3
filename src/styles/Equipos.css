@@ -1,18 +1,15 @@
 .Equipos_Contenedor {
-  background-color: var(--bg-body);
+  background-color: var(--Fondo-pantalla);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .Barra_Busqueda {
   display: flex;
   width: 100%;
-  margin-left: -8px;
-}
-
-.Barra_Busqueda_Contenedor2 {
-  display: flex;
-  width: 100%;
-  position: fixed;
-  justify-content: center;
+  flex-shrink: 0;
 }
 
 .Barra_Busqueda_Contenedor {
@@ -20,72 +17,109 @@
   width: 101%;
   height: 70px;
   box-shadow: var(--shadow-custom);
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  background-color: var(--bg-barra);
+  background-color: var(--Fondo-elementos2);
+  padding: 0 30px;
+  gap: 30px;
+}
+
+.team-name-header {
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--Texto-primario);
+  margin: 0;
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+  min-width: 200px;
+  flex-shrink: 0;
+}
+
+.Barra_Busqueda_Contenedor2 {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  z-index: 100;
 }
 
 .Barra_Busqueda_Componentes {
   display: flex;
   gap: 15px;
-  width: 70%;
+  flex: 1;
   justify-content: center;
+  align-items: center;
+  max-width: 800px;
 }
 
 .Barra_Busqueda_Componentes button {
   background-color: transparent;
   border: none;
   font-size: 14px;
-  padding: 10px 0px;
-  color: var(--text-primary);
-  transition: 0.5s;
+  padding: 10px 12px;
+  color: var(--Texto-primario);
+  transition: 0.3s;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
 }
- 
-.Barra_Busqueda_Componentes button:hover {
-  scale: 1.1;
+
+.Btn_Refresh:hover {
+  transform: rotate(-180deg);
+}
+
+.Btn_Refresh:active {
+  transform: rotate(-400deg);
+}
+
+.Filtros:hover {
+  transform: scale(1.1);
 }
 
 .Input_Busqueda {
   display: flex;
   align-items: center;
-  width: 60%;
+  width: 50%;
 }
 
-.Input_Busqueda input {
-  width: 100%;
+.Input_Busqueda_Estilo {
+  width: 50%;
   border: none;
   border-radius: 20px;
   box-shadow: var(--shadow-custom);
-  background-color: var(--Input-Fondo);
-  padding: 10px 20px;
+  padding: 12px 20px;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.Input_Busqueda input:focus {
+  outline: none;
+  transform: translateY(-1px);
 }
 
 .Equipos_Contenido {
-  margin-top: 80px;
-  height: 89vh;
+  flex: 1;
+  overflow-y: auto;
+  padding-top: 10px;
 }
 
 .Equipos_Medio {
   width: 95%;
-  height: 45%;
+  height: 60%;
   display: flex;
   padding: 20px;
   justify-content: space-between;
+  gap: 20px;
 }
 
 .Equipos_Chat {
   width: 50%;
-  height: 100%;
-  background-color: var(--bg-elementos);
-  box-shadow: var(--shadow-custom);
-  border-radius: 20px;
-  padding: 10px;
+  height: 105%;
 }
 
 .Equipos_Miembros {
   width: 45%;
   height: 107%;
-  background-color: var(--bg-elementos);
+  background-color: var(--Fondo-elementos);
   box-shadow: var(--shadow-custom);
   border-radius: 20px;
 }
@@ -96,20 +130,73 @@
 
 .Equipos_Miembros_Titulo {
   display: flex;
-  padding: 10px 20px;
+  padding: 15px 25px;
   justify-content: space-between;
+  align-items: center;
   height: 10%;
   margin-bottom: -20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.Btns_rutas {
+  display: flex;
+  gap: 30px;
+}
+
+.navegacion-carpetas {
+  display: flex;
+  width: 50%;
+}
+
+.breadcrumbs-container {
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumb-home-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  border: none;
+  background-color: var(--Btn-primario);
+  color: var(--Texto-blanco);
+  box-shadow: var(--shadow-custom);
+  padding: 10px;
+  cursor: pointer;
+}
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+}
+
+.breadcrumbs button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.breadcrumbs button:hover {
+  text-decoration: underline;
+  color: #4caf50;
+}
+
+.breadcrumb-item-wrapper {
+  display: flex;
+  align-items: center;
 }
 
 .Equipos_Miembros_Titulo h1 {
   margin: 0;
-  font-weight: 100;
+  font-weight: 400;
+  font-size: 24px;
+  letter-spacing: 0.5px;
 }
 
 .Equipos_Miembros_Titulo button {
- display: flex;
-
+  display: flex;
 }
 
 .Equipos_Miembros_Titulo button,
@@ -118,33 +205,56 @@
   border: none;
   font-size: 35px;
   margin: 0;
-  transition: 0.5s;
-  justify-content: center;
-  align-items: center;
-  color: var(--text-primary);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--Texto-primario);
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 4px;
 }
 
-.Equipos_Miembros_Titulo button:hover,
-.Boton_Accion:hover {
-  transform: rotate(180deg);
-  scale: 1.15;
+.Equipos_Miembros_Titulo button:hover {
+  transform: rotate(180deg) scale(1.15);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.Equipos_Miembros_Titulo button:active {
+  transform: rotate(180deg) scale(1.1);
+}
+
+.Equipos_Miembros_Titulo button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.Equipos_Miembros_Titulo button:disabled:hover {
+  transform: none;
+  background-color: transparent;
 }
 
 .Barra_Acciones {
   display: flex;
-  gap: 10px;
+  gap: 12px;
+  align-items: center;
 }
 
 .Barra_Acciones button {
   background-color: transparent;
   border: none;
-  transition: 0.5s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   font-size: 10px;
-  color: var(--text-primary);
+  color: var(--Texto-primario);
+  cursor: pointer;
+  padding: 6px;
 }
 
 .Barra_Acciones button:hover {
-  scale: 1.18;
+  transform: scale(1.2);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.Barra_Acciones button:active {
+  transform: scale(1.15);
 }
 
 .Equipos_Btns {
@@ -154,31 +264,51 @@
 }
 
 .Equipos_Btns button {
-  background-color: #212529;
+  background-color: var(--Btn-primario);
   border: none;
   border-radius: 20px;
   font-size: 14px;
-  padding: 10px 20px;
+  padding: 12px 24px;
   color: white;
   box-shadow: var(--shadow-custom);
-  transition: 0.5s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  font-weight: 400;
 }
 
 .Equipos_Btns button:hover {
-  scale: 1.1;
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  background-color: #2c3136;
+}
+
+.Equipos_Btns button:active {
+  transform: scale(1.02) translateY(-1px);
 }
 
 .Menu_Rol {
-  position:sticky;
+  position: sticky;
   top: 100%;
   right: 0;
-  background-color: var(--bg-elementos);
-  border-radius: 10px;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+  background-color: var(--Fondo-elementos);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   z-index: 9999;
-  margin-top: 5px;
+  margin-top: 8px;
   min-width: 180px;
   overflow: hidden;
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .Menu_Rol_Item {
@@ -187,15 +317,56 @@
   padding: 12px 20px;
   background-color: transparent;
   border: none;
-  color: var(--text-primary);
+  color: var(--Texto-primario);
   text-align: left;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.2s ease;
   font-size: 14px;
 }
 
 .Menu_Rol_Item:hover {
-  background-color: var(--hover-tabla);
+  background-color: var(--Hover-tabla);
+  padding-left: 24px;
+}
+
+.Menu_Rol_Item.active {
+  background-color: rgba(76, 175, 80, 0.15);
+  color: #4caf50;
+  font-weight: 500;
+}
+
+.menu-separador {
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin: 8px 0;
+}
+
+.menu-item-peligro {
+  color: #ff6b6b;
+}
+
+.menu-item-peligro:hover {
+  background-color: rgba(255, 107, 107, 0.15);
+  color: #ff5252;
+}
+
+.rol-badge {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 400;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--Texto-primario);
+  text-align: center;
+  letter-spacing: 0.3px;
+}
+
+.rol-badge.creador {
+  background: var(--Btn-primario);
+  box-shadow: var(--shadow-custom);
+  color: white;
+  font-weight: 400;
 }
 
 .Subir_Archivos_Contenedor {
@@ -204,32 +375,54 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
   left: var(--sidebar-width, 200px);
-  backdrop-filter: blur(10px);
-  z-index: 999999;
+  backdrop-filter: blur(12px);
+  z-index: 10000;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .Subir_Archivos_Formulario {
   padding: 2rem;
-  color: var(--text-primary);
-  background-color: var(--bg-elementos);
-  border-radius: 20px;
+  color: var(--Texto-primario);
+  background-color: var(--Fondo-elementos);
+  border-radius: 24px;
   width: 90%;
   max-width: 500px;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: var(--shadow-custom);
-  z-index: 9999999;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  z-index: 10001;
+  animation: scaleIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .Subir_Archivos_Titulo {
   text-align: center;
   font-size: 1.5rem;
-  margin-bottom: .5rem;
+  margin-bottom: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -238,79 +431,127 @@
 
 .Subir_Archivos_Titulo h2 {
   margin: 0;
-  color: var(--text-primary);
-  font-size: 25px;
-  font-weight: 100;
+  color: var(--Texto-primario);
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
 }
 
 .Drop_Area {
-  border: 2px dashed var(--text-primary);
+  border: 2px dashed var(--Texto-primario);
   border-radius: 20px;
-  padding: 2rem;
+  padding: 2.5rem;
   text-align: center;
   cursor: pointer;
-  transition: .3s;
-  background-color: var(--bg-elementos);
+  transition: all 0.3s ease;
+  background-color: var(--Fondo-elementos);
   display: flex;
   flex-direction: column;
-  gap: .5rem;
+  gap: 0.8rem;
+}
+
+.Drop_Area:hover {
+  transform: scale(1.01);
 }
 
 .Drop_Area.active {
   border-color: #4caf50;
   background: var(--bg-dragdrp);
+  transform: scale(1.02);
+  box-shadow: 0 0 20px rgba(76, 175, 80, 0.3);
 }
 
 .Btn_Seleccionar {
-  background-color: #3a3d43;
+  background-color: var(--Btn-primario);
   border: none;
-  padding: .6rem 1rem;
+  padding: 0.7rem 1.2rem;
   border-radius: 20px;
   color: #fff;
   cursor: pointer;
-  transition: 0.5s;
-  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-custom);
+  font-weight: 400;
+  font-size: 14px;
 }
 
 .Btn_Seleccionar:hover {
   background-color: #131618;
-  scale: 1.05;
+  transform: scale(1.05) translateY(-2px);
+}
+
+.Btn_Seleccionar:active {
+  transform: scale(1.02) translateY(-1px);
 }
 
 .Subir_Archivos_Acciones {
   display: flex;
   justify-content: space-between;
+  gap: 1rem;
   margin-top: 1.5rem;
 }
 
 .Btn_Cancelar,
 .Btn_Subir {
   flex: 1;
-  margin: 0 .25rem;
   border: none;
   border-radius: 20px;
-  padding: .6rem;
+  padding: 0.7rem;
   color: #fff;
   cursor: pointer;
-  background-color: #3a3d43;
-  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.25);
-  transition: 0.5s;
+  background-color: var(--Btn-primario);
+  box-shadow: var(--shadow-custom);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.Btn_Cancelar {
+  background-color: var(--Btn-cancelar);
 }
 
 .Btn_Cancelar:hover,
 .Btn_Subir:hover {
-  scale: 1.03;
-  background-color: #131618;
+  transform: scale(1.03) translateY(-2px);
+}
+
+.Btn_Cancelar:hover {
+  background-color: var(--Hover-cancelar);
+}
+
+.Btn_Cancelar:active,
+.Btn_Subir:active {
+  transform: scale(1.01) translateY(-1px);
 }
 
 .Archivos_Lista {
-  padding: 10px 5px;
+  padding: 15px 10px;
+  margin-top: 10px;
+  background-color: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+}
+
+.Archivos_Contador {
+  font-size: 13px;
+  opacity: 0.8;
+  margin-bottom: 10px;
+  font-weight: 300;
 }
 
 .Archivo_Item {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 5px 10px;
+  border-radius: 20px;
+  transition: all 0.2s ease;
+  margin-bottom: 6px;
+  background-color: var(--seleccion-2);
+  color: var(--Texto-segundo);
+  font-size: 14px;
+}
+
+.Archivo_Item:hover {
+  scale: 1.01;
 }
 
 .Archivo_Remover {
@@ -319,15 +560,23 @@
   color: white;
   cursor: pointer;
   font-size: 20px;
-  transition: 0.5s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
 }
 
 .Archivo_Remover:hover {
-  transform: rotate(180deg);
+  transform: rotate(180deg) scale(1.2);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
+.Archivo_Remover:active {
+  transform: rotate(180deg) scale(1.1);
+}
 
 .Crear_Carpeta_Contenedor {
   position: fixed;
@@ -335,32 +584,34 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
   left: var(--sidebar-width, 200px);
-  backdrop-filter: blur(10px);
-  z-index: 999999;
+  backdrop-filter: blur(12px);
+  z-index: 10000;
+  animation: fadeIn 0.2s ease-out;
 }
 
 .Crear_Carpeta_Formulario {
   padding: 2rem;
-  color: var(--text-primary);
-  background-color: var(--bg-elementos);
-  border-radius: 20px;
+  color: var(--Texto-primario);
+  background-color: var(--Fondo-elementos);
+  border-radius: 24px;
   width: 90%;
   max-width: 500px;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: var(--shadow-custom);
-  z-index: 9999999;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  z-index: 10001;
+  animation: scaleIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .Crear_Carpeta_Titulo {
   text-align: center;
   font-size: 1.5rem;
-  margin-bottom: .5rem;
+  margin-bottom: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -370,22 +621,27 @@
 .Crear_Carpeta_Titulo h2 {
   margin: 0;
   color: var(--text-primary);
-  font-size: 25px;
-  font-weight: 100;
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
 }
 
 .Crear_Carpeta_Contenido input {
   width: 95%;
   background-color: var(--Input-Fondo);
   border: none;
-  padding: 10px 15px;
+  padding: 12px 18px;
   box-shadow: var(--shadow-custom);
   border-radius: 20px;
-  color: var(--text-primary);
+  color: var(--Texto-primario);
+  font-size: 14px;
+  transition: all 0.3s ease;
 }
 
-
-/* --- Estilos para el Modal de Invitación de Miembro --- */
+.Crear_Carpeta_Contenido input:focus {
+  outline: none;
+  transform: translateY(-1px);
+}
 
 .invitar-miembro-overlay {
   position: fixed;
@@ -393,31 +649,33 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
-  left: var(--sidebar-width, 200px); /* Mantiene tu variable */
-  backdrop-filter: blur(10px);
-  z-index: 999999;
+  left: var(--sidebar-width, 200px);
+  backdrop-filter: blur(12px);
+  z-index: 10000;
+  animation: fadeIn 0.2s ease-out;
 }
 
 .invitar-miembro-modal {
   padding: 2rem;
-  color: var(--text-primary);
-  background-color: var(--bg-elementos);
-  border-radius: 20px;
+  color: var(--Texto-primario);
+  background-color: var(--Fondo-elementos);
+  border-radius: 24px;
   width: 90%;
   max-width: 500px;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: var(--shadow-custom);
-  z-index: 9999999;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  z-index: 10001;
+  animation: scaleIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .invitar-miembro-header {
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -426,22 +684,34 @@
 
 .invitar-miembro-header h2 {
   margin: 0;
-  color: var(--text-primary);
-  font-size: 25px;
-  font-weight: 100;
+  color: var(--Texto-primario);
+  font-size: 28px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
 }
 
 .invitar-miembro-btn-cerrar {
   background: transparent;
   border: none;
-  color: var(--text-primary);
-  font-size: 25px;
+  color: var(--Texto-primario);
+  font-size: 28px;
   cursor: pointer;
-  transition: 0.5s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
 }
 
 .invitar-miembro-btn-cerrar:hover {
-  transform: scale(1.2);
+  transform: scale(1.2) rotate(90deg);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.invitar-miembro-btn-cerrar:active {
+  transform: scale(1.1) rotate(90deg);
 }
 
 .invitar-miembro-body {
@@ -452,64 +722,98 @@
   width: 95%;
   background-color: var(--Input-Fondo);
   border: none;
-  padding: 10px 15px;
-  margin-bottom: 1rem;
-  box-shadow: var(--shadow-custom);
+  padding: 12px 18px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   border-radius: 20px;
-  color: var(--text-primary);
+  color: var(--Texto-primario);
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.invitar-miembro-input-busqueda:focus {
+  outline: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transform: translateY(-1px);
 }
 
 .invitar-miembro-lista-usuarios {
   max-height: 300px;
   overflow-y: auto;
   margin-top: 1rem;
+  padding-right: 5px;
+}
+
+.invitar-miembro-lista-usuarios::-webkit-scrollbar {
+  width: 6px;
+}
+
+.invitar-miembro-lista-usuarios::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.invitar-miembro-lista-usuarios::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+.invitar-miembro-lista-usuarios::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .invitar-miembro-usuario-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 15px;
+  padding: 14px 18px;
   background-color: var(--bg-dragdrp);
-  border-radius: 10px;
+  border-radius: 12px;
   margin-bottom: 10px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   width: 90%;
+  border: 2px solid transparent;
 }
 
 .invitar-miembro-usuario-item:hover {
-  background-color: var(--hover-inbox);
+  background-color: var(--Hover-inbox);
   transform: translateX(5px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .invitar-miembro-usuario-item.selected {
   background-color: var(--seleccion-1);
   border: 2px solid #4caf50;
-  box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+  box-shadow: 0 4px 16px rgba(76, 175, 80, 0.3);
+  transform: translateX(8px);
 }
 
 .invitar-miembro-usuario-item .usuario-nombre {
   margin: 0;
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 15px;
 }
 
 .invitar-miembro-usuario-item .usuario-email {
-  margin: 0;
-  font-size: 12px;
+  margin: 5px 0 0 0;
+  font-size: 13px;
   opacity: 0.7;
 }
 
 .invitar-miembro-usuario-item .usuario-check {
   color: #4caf50;
-  font-size: 20px;
+  font-size: 24px;
+  font-weight: bold;
 }
 
 .no-usuarios-encontrados {
   text-align: center;
-  opacity: 0.7;
+  opacity: 0.6;
+  padding: 20px;
+  font-size: 14px;
 }
- 
+
 .invitar-miembro-acciones {
   display: flex;
   justify-content: space-between;
@@ -522,65 +826,117 @@
   flex: 1;
   border: none;
   border-radius: 20px;
-  padding: .6rem;
+  padding: 0.7rem;
   color: #fff;
   cursor: pointer;
   background-color: #3a3d43;
   box-shadow: var(--shadow-custom);
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.invitar-miembro-btn-cancelar {
+  background-color: var(--Btn-cancelar);
 }
 
 .invitar-miembro-btn-cancelar:hover,
 .invitar-miembro-btn-enviar:hover {
-  transform: scale(1.03);
-  background-color: #131618;
+  transform: scale(1.03) translateY(-2px);
+}
+ 
+.invitar-miembro-btn-cancelar:hover {
+  background-color: var(--Hover-cancelar);
+}
+
+.invitar-miembro-btn-cancelar:active,
+.invitar-miembro-btn-enviar:active {
+  transform: scale(1.01) translateY(-1px);
 }
 
 .invitar-miembro-btn-enviar:disabled {
   opacity: 0.5;
   cursor: not-allowed;
-  transform: scale(1);
+  transform: none;
+  background-color: #3a3d43;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.invitar-miembro-btn-enviar:disabled:hover {
+  transform: none;
   background-color: #3a3d43;
 }
 
-/* src/app/global.css o un archivo CSS importado */
-
 .filtros-modal-overlay {
-  position: fixed; /* Ocupa toda la pantalla */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* Asegura que esté por encima de todo */
+  z-index: 10000;
+  backdrop-filter: blur(12px);
+  animation: fadeIn 0.2s ease-out;
 }
 
 .filtros-modal-content {
-  background: white;
+  background: var(--Fondo-elementos);
   padding: 2rem;
-  border-radius: 8px;
+  border-radius: 24px;
   min-width: 400px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: scaleIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--Texto-primario);
+  z-index: 10001;
 }
 
-.filtro-grupo, .filtro-grupo-inline {
-  margin-bottom: 1rem;
+.filtros-modal-content h2 {
+  margin-top: 0;
+  font-weight: 400;
+  font-size: 28px;
+  letter-spacing: 0.5px;
+  margin-bottom: 1.5rem;
+}
+
+.filtro-grupo,
+.filtro-grupo-inline {
+  margin-bottom: 1.2rem;
+}
+
+.Filtro-date {
+  width: 80%;
+}
+
+.filtro-grupo select {
+  width: 100%;
 }
 
 .filtro-grupo label {
-  display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
   font-weight: 500;
+  font-size: 14px;
 }
 
-.filtro-grupo select, .filtro-grupo input {
-  width: 100%;
-  padding: 0.5rem;
-  border-radius: 4px;
-  border: 1px solid #ccc;
+.filtro-grupo select,
+.filtro-grupo input {
+  padding: 10px 15px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: var(--Input-Fondo);
+  color: var(--Texto-primario);
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.filtro-grupo select:focus,
+.filtro-grupo input:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transform: translateY(-1px);
 }
 
 .filtro-grupo-inline {
@@ -593,4 +949,67 @@
   justify-content: flex-end;
   gap: 1rem;
   margin-top: 2rem;
+}
+
+.Filtro-favoritos-label {
+  background-color: var(--Btn-primario);
+  color: var(--Texto-segundo);
+  width: 95%;
+  padding: 10px;
+  border-radius: 20px;
+  display: flex;
+  gap: 10px;
+  font-size: 16px;
+  box-shadow: var(--shadow-custom);
+}
+
+.filtros-acciones button {
+  border: none;
+  border-radius: 20px;
+  padding: 0.7rem 1.5rem;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: var(--shadow-custom);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.Filtos-Btn-Cancelar {
+  background-color: var(--Btn-cancelar);
+}
+
+.Filtos-Btn-Aplicar {
+  background-color: var(--Btn-primario);
+}
+
+.filtros-acciones button:hover {
+  transform: scale(1.05) translateY(-2px);
+}
+
+.Filtos-Btn-Cancelar:hover {
+  background-color: var(--Hover-cancelar);
+}
+
+.filtros-acciones button:active {
+  transform: scale(1.02) translateY(-1px);
+}
+
+.nombre-carpeta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.archivo-link {
+  color: var(--Texto-primario);
+  text-decoration: none;
+}
+
+.archivo-link:hover,
+.nombre-carpeta:hover {
+  color: #4caf50;
+  text-decoration: underline;
+  cursor: pointer;
 }

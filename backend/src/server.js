@@ -1,10 +1,99 @@
-import app from "./app.js";
-import dotenv from "dotenv";
+import app from "./app.js"
+import dotenv from "dotenv"
+import http from "http"
+import { Server } from "socket.io"
 
-dotenv.config();
+dotenv.config()
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 4000
 
-app.listen(PORT, () => {
-  console.log(`🚀 Servidor backend corriendo en http://localhost:${PORT}`);
-});
+const server = http.createServer(app)
+
+const io = new Server(server, {
+  cors: {
+    origin: process.env.FRONTEND_URL || "http://localhost:3000",
+    methods: ["GET", "POST"],
+    credentials: true,
+  },
+})
+
+const activeUsers = new Map()
+
+io.on("connection", (socket) => {
+  console.log(`[Socket.io] Nuevo usuario conectado: ${socket.id}`)
+
+  // Handle user joining
+  socket.on("user:join", (userId) => {
+    activeUsers.set(userId, socket.id)
+    console.log(`[Socket.io] Usuario ${userId} conectado a Socket.io`)
+  })
+
+  // Handle sending direct messages
+  socket.on("message:send", (data) => {
+    const { fromUserId, toUserId, message, timestamp } = data
+    const recipientSocketId = activeUsers.get(toUserId)
+
+    if (recipientSocketId) {
+      // Send to recipient if online
+      io.to(recipientSocketId).emit("message:receive", {
+        fromUserId,
+        toUserId,
+        message,
+        timestamp,
+        read: false,
+      })
+    }
+
+    // Send back confirmation to sender
+    socket.emit("message:sent", {
+      fromUserId,
+      toUserId,
+      message,
+      timestamp,
+    })
+  })
+
+  // Handle typing indicator
+  socket.on("typing:start", (data) => {
+    const { fromUserId, toUserId } = data
+    const recipientSocketId = activeUsers.get(toUserId)
+
+    if (recipientSocketId) {
+      io.to(recipientSocketId).emit("typing:indicator", {
+        userId: fromUserId,
+        isTyping: true,
+      })
+    }
+  })
+
+  socket.on("typing:stop", (data) => {
+    const { fromUserId, toUserId } = data
+    const recipientSocketId = activeUsers.get(toUserId)
+
+    if (recipientSocketId) {
+      io.to(recipientSocketId).emit("typing:indicator", {
+        userId: fromUserId,
+        isTyping: false,
+      })
+    }
+  })
+
+  // Handle user going offline
+  socket.on("disconnect", () => {
+    for (const [userId, socketId] of activeUsers.entries()) {
+      if (socketId === socket.id) {
+        activeUsers.delete(userId)
+        console.log(`[Socket.io] Usuario ${userId} desconectado`)
+        break
+      }
+    }
+  })
+})
+
+// Export io instance for use in routes if needed
+app.set("io", io)
+
+server.listen(PORT, () => {
+  console.log(`🚀 Servidor backend corriendo en http://localhost:${PORT}`)
+  console.log(`⚡ Socket.io escuchando conexiones`)
+})

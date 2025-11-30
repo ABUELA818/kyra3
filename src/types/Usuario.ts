@@ -6,4 +6,4 @@ export interface Usuario {
   Rol?: string; // Opcional: El nombre del rol (ej: "Admin"), útil si lo unes en el backend.
   Color: string;
   Fecha_Creacion: string; // Las fechas se reciben como strings en formato ISO desde el JSON.
-}
+} 

@@ -2,8 +2,8 @@
 .asignados-container {
   display: flex;
   height: 100vh;
-  background-color: var(--bg-body);
-  margin-left: -8px;
+  background-color: var(--Fondo-pantalla, #1a1a1a);
+  overflow-x: hidden;
 }
 
 .asignados-content {
@@ -14,27 +14,26 @@
 
 /* Asignaciones recibidas (sidebar izquierda) */
 .asignaciones-recibidas {
-  margin: 10px;
+  margin: 2px 15px;
   width: 30%;
-  background-color: var(--bg-elementos);
+  background-color: var(--Fondo-elementos, #2a2a2a);
   color: white;
   display: flex;
   flex-direction: column;
-  box-shadow: var(--shadow-custom);
+  box-shadow: var(--shadow-custom, 0 2px 8px rgba(0, 0, 0, 0.3));
   border-radius: 20px;
-
-} 
+}
 
 .asignaciones-recibidas-titulo {
-  color: var(--text-primary);
+  color: var(--Texto-primario, #fff);
   display: flex;
   justify-content: center;
   padding-top: 30px;
   padding-bottom: 20px;
   margin: 0;
   font-size: 25px;
-  font-weight: 100;
-  border-bottom: 1px solid var(--borde-tabla);
+  font-weight: 400;
+  border-bottom: 0.5px solid var(--Borde-tabla, #444);
 }
 
 .asignaciones-lista {
@@ -42,22 +41,22 @@
   overflow-y: auto;
   padding: 0;
 }
- 
+
 .asignacion-item {
   padding: 16px 20px;
-  border-bottom: 0.5px solid var(--borde-tabla);
+  border-bottom: 0.5px solid var(--Borde-tabla, #444);
   cursor: pointer;
   transition: background-color 0.2s;
-  color: var(--text-primary);
+  color: var(--Texto-primario, #fff);
 }
 
 .asignacion-item:hover {
-  background-color: var(--hover-tabla);
+  background-color: var(--Hover-tabla, #333);
 }
 
 .asignacion-item.seleccionada {
-  background-color: var(--seleccion-1);
-  border-left: 4px solid #E47A6E;
+  background-color: var(--seleccion-1, #3a3a3a);
+  border-left: 4px solid #e47a6e;
 }
 
 .asignacion-autor {
@@ -69,7 +68,7 @@
 
 .autor-nombre {
   font-size: 15px;
-  font-weight: 100;
+  font-weight: 400;
 }
 
 .asignacion-contenido {
@@ -80,7 +79,7 @@
 
 .asignacion-titulo {
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 300;
   margin: 0;
   flex: 1;
   line-height: 1.4;
@@ -94,13 +93,13 @@
 }
 
 /* Área principal derecha */
-.asignados-main {
+.asignados-main-derecha {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  background-color: var(--bg-body);
+  display: grid;
+  background-color: var(--Fondo-pantalla, #1a1a1a);
   height: 100%;
   width: 100%;
+  padding: 1%;
 }
 
 .asignacion-detalle-container {
@@ -118,38 +117,25 @@
   font-size: 16px;
 }
 
-/* Estilos del componente de detalle */
-.Asignaciones_detalladas {
-  gap: 20px;
-}
-
-.Asignacion_Informacion {
-  width: 95%;
-}
-
-.Asignaciones_Historial {
-  width: 95%;
-}
-
 /* Crear asignación */
 .crear-asignacion {
   display: flex;
-  background-color: var(--bg-elementos);
-  box-shadow: var(--shadow-custom);
+  background-color: var(--Fondo-elementos, #2a2a2a);
+  box-shadow: var(--shadow-custom, 0 2px 8px rgba(0, 0, 0, 0.3));
   flex-direction: column;
   gap: 20px;
-  padding: 20px 10px;
-  width: 94%;
+  padding: 20px 20px;
+  width: 92%;
   border-radius: 20px;
-  margin-left: 10px;
   margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .crear-asignacion-titulo {
   font-size: 25px;
-  font-weight: 100;
+  font-weight: 400;
   margin: 0;
-  color: var(--text-primary);
+  color: var(--Texto-primario, #fff);
 }
 
 .Titulo_Usuarios {
@@ -172,13 +158,13 @@
 .form-grupo-inline {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 16px;
+  gap: 10px;
 }
 
 .form-label {
   font-size: 14px;
   font-weight: 500;
-  color: var(--text-primary);
+  color: var(--Texto-primario, #fff);
 }
 
 .form-input,
@@ -187,20 +173,23 @@
   padding: 10px 12px;
   border-radius: 6px;
   font-size: 14px;
-  transition: border-color 0.2s;
-  background-color: var(--Input-Fondo);
-  box-shadow: var(--shadow-custom);
+  background-color: var(--Input-Fondo, #3a3a3a);
+  box-shadow: var(--shadow-custom, 0 2px 8px rgba(0, 0, 0, 0.3));
   border-radius: 20px;
   border: none;
-  color: var(--text-primary);
+  color: var(--Texto-primario, #fff);
+}
+
+.form-input,
+.form-select {
+  width: 90%;
 }
 
 .form-input:focus,
 .form-textarea:focus,
 .form-select:focus {
   outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  border-color: none;
 }
 
 .titulo-input {
@@ -211,6 +200,7 @@
 .form-textarea {
   resize: vertical;
   min-height: 80px;
+  width: 97%;
 }
 
 .buscar-usuarios-container {
@@ -222,23 +212,52 @@
   top: 100%;
   left: 0;
   right: 0;
-  background: var(--Input-Fondo);
-  border: 1px solid var(--borde-tabla);
-  border-top: none;
-  border-radius: 0 0 6px 6px;
-  max-height: 150px;
+  background: var(--Input-Fondo, #3a3a3a);
+  border: none;
+  border-radius: 20px;
+  max-height: 200px;
   overflow-y: auto;
-  z-index: 10;
+  z-index: 10002;
+  margin-top: 8px;
+  box-shadow: var(--shadow-custom, 0 2px 8px rgba(0, 0, 0, 0.3)), 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 6px;
 }
 
 .usuario-opcion {
-  padding: 10px 12px;
+  padding: 12px 14px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s ease;
+  border-radius: 12px;
+  color: var(--Texto-primario, #fff);
+  font-size: 14px;
 }
 
 .usuario-opcion:hover {
-  background-color: var(--hover-tabla);
+  background-color: var(--Hover-tabla, #333);
+  transform: translateX(2px);
+}
+
+.usuario-opcion:active {
+  transform: translateX(0px);
+  opacity: 0.8;
+}
+
+.usuarios-dropdown::-webkit-scrollbar {
+  width: 6px;
+}
+
+.usuarios-dropdown::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+.usuarios-dropdown::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+.usuarios-dropdown::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .usuarios-seleccionados {
@@ -251,17 +270,18 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 10px;
-  background-color: #e0e7ff;
-  color: #3730a3;
+  padding: 6px;
+  color: var(--Texto-segundo);
   border-radius: 20px;
   font-size: 14px;
+  background-color: var(--seleccion-2);
+  box-shadow: var(--shadow-custom);
 }
 
 .remover-usuario {
   background: none;
   border: none;
-  color: #6366f1;
+  color: var(--Texto-segundo);
   cursor: pointer;
   font-size: 16px;
   font-weight: bold;
@@ -272,11 +292,13 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  transition: background-color 0.2s;
+  transition: 0.2s;
 }
 
 .remover-usuario:hover {
-  background-color: rgba(99, 102, 241, 0.1);
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: rotate(180deg);
+  scale: 1.2;
 }
 
 .form-file {
@@ -286,18 +308,18 @@
 .file-label {
   display: inline-block;
   padding: 10px 16px;
-  background-color: var(--Input-Fondo);
-  box-shadow: var(--shadow-custom);
+  background-color: var(--Input-Fondo, #3a3a3a);
+  box-shadow: var(--shadow-custom, 0 2px 8px rgba(0, 0, 0, 0.3));
   border: none;
   border-radius: 20px;
   cursor: pointer;
   font-size: 14px;
-  color: var(--text-primary);
-  transition: background-color 0.2s;
+  color: var(--Texto-primario, #fff);
+  transition: 0.2s;
 }
 
 .file-label:hover {
-  background-color: var(--hover-tabla);
+  scale: 1.04;
 }
 
 .archivos-seleccionados {
@@ -311,16 +333,17 @@
   align-items: center;
   justify-content: space-between;
   padding: 8px 12px;
-  background-color: var(--bg-elementos);
-  border: 1px solid var(--borde-tabla);
+  background-color: var(--seleccion-2);
+  border: none;
   border-radius: 20px;
   font-size: 14px;
+  color: var(--Texto-segundo);
 }
 
 .remover-archivo {
   background: none;
   border: none;
-  color: #0ea5e9;
+  color: var(--Texto-segundo);
   cursor: pointer;
   font-size: 16px;
   font-weight: bold;
@@ -331,11 +354,13 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  transition: background-color 0.2s;
+  transition: 0.2s;
 }
 
 .remover-archivo:hover {
-  background-color: rgba(14, 165, 233, 0.1);
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: rotate(180deg);
+  scale: 1.2;
 }
 
 .form-acciones {
@@ -348,20 +373,32 @@
 
 .btn-cancelar,
 .btn-asignar {
-  background-color: #212529;
   border-radius: 25px;
   border: none;
-  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--shadow-custom);
   font-size: 15px;
   padding: 10px 12px;
   width: 150px;
-  color: #FCFCF7;
-  transition: 0.5s;
+  color: #fcfcf7;
+  transition: 0.2s;
+  width: 50%;
+}
+
+.btn-asignar {
+  background-color: var(--Btn-primario);
+}
+
+.btn-cancelar {
+  background-color: var(--Btn-cancelar);
 }
 
 .btn-asignar:hover,
 .btn-cancelar:hover {
-  scale: 1.08;
+  transform: translateY(2px);
+}
+
+.btn-cancelar:hover {
+  background-color: var(--Hover-cancelar);
 }
 
 /* Responsive */
@@ -381,7 +418,7 @@
   }
 
   .asignaciones-recibidas {
-    width: 100%;
+    width: 93%;
     height: 300px;
   }
 

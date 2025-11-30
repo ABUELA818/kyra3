@@ -13,7 +13,7 @@ export function EquipoIconos({ integrantes }: { integrantes: Integrante[] }) {
   const restantes = integrantes.length - maxVisibles;
 
   return (
-    <div style={{ display: "flex", alignItems: "center", gap: "-4px", justifyContent: "center" }}>
+    <div style={{ display: "flex", alignItems: "center", gap: "-4px", justifyContent: "center", zIndex: "98" }}>
       {visibles.map((int, i) => (
         <Icono_Perfil key={i} Imagen={int.Imagen} Nombre={int.nombre} color={int.color} />
       ))}

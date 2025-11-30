@@ -1,37 +1,60 @@
-import "@/styles/Icono-Perfil.css"; 
-import Link from "next/link";
+"use client"
+
+import type React from "react"
+
+import "@/styles/Icono-Perfil.css"
+import { useUserMenu } from "@/context/user-menu-context"
 
 interface IconPerfilProps {
-  Imagen?: string;
-  Nombre: string;
-  color: string;
+  Imagen?: string
+  Nombre: string
+  color: string
+  userId?: number | string
 }
 
-export default function Icono_Perfil({ Imagen, Nombre, color }: IconPerfilProps) {
-  const Inicial = Nombre.charAt(0).toUpperCase();
+export default function Icono_Perfil({ Imagen, Nombre, color, userId }: IconPerfilProps) {
+  const Inicial = (Nombre || "?").charAt(0).toUpperCase()
+  const { openUserMenu } = useUserMenu()
+
+  const handleClick = (e: React.MouseEvent) => {
+    console.log("[v0] Icono_Perfil clicked", { userId, Nombre })
+    e.preventDefault()
+    e.stopPropagation()
+    if (userId) {
+      console.log("[v0] Opening user menu for userId:", userId)
+      openUserMenu(Number(userId))
+    } else {
+      console.log("[v0] No userId provided, cannot open menu")
+    }
+  }
 
   return (
-    <Link
-      href={`/app/Usuarios/${Nombre}`}
+    <button
+      onClick={handleClick}
       className="icono-perfil-contenedor"
       style={{
-        backgroundColor: Imagen ? "transparent" : color
+        backgroundColor: Imagen ? "transparent" : color,
+        border: "none",
+        cursor: userId ? "pointer" : "default",
       }}
-      title={Nombre}
+      title={Nombre || "Usuario"}
+      disabled={!userId}
+      type="button"
     >
       {Imagen ? (
         <img
-          src={Imagen}
-          alt={Nombre}
+          src={Imagen || "/placeholder.svg"}
+          alt={Nombre || "Usuario"}
           style={{
             width: "100%",
             height: "100%",
             objectFit: "cover",
+            pointerEvents: "none",
           }}
         />
       ) : (
         Inicial
       )}
-    </Link>
-  );
+    </button>
+  )
 }

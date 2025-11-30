@@ -1,6 +1,8 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useSearchParams } from "next/navigation"
+import { useUser } from "@/context/userContext"
 import ProyectoCard from "@/components/organisms/Tarjeta_Proyecto"
 import Crear_Proyecto from "@/components/organisms/Crear_Proyecto"
 import Barra_Modificaciones from "@/components/organisms/Barra_Modificaiones"
@@ -20,6 +22,10 @@ function formatearFecha(fechaISO: string): string {
 }
 
 export default function ProyectosPage() {
+  const searchParams = useSearchParams()
+  const proyectoIdAExpandir = searchParams.get("proyecto")
+  const { usuario } = useUser()
+
   const [proyectos, setProyectos] = useState<ProyectoUI[]>([])
   const [usuarios, setUsuarios] = useState<Usuario[]>([])
   const [loading, setLoading] = useState(true)
@@ -27,9 +33,11 @@ export default function ProyectosPage() {
   const [showCrearProyecto, setShowCrearProyecto] = useState(false)
   const { canCreateProject } = usePermissions()
 
-  const idUsuarioActual = 4
+  const idUsuarioActual = usuario?.id
 
   const fetchProyectos = async () => {
+    if (!idUsuarioActual) return
+
     setLoading(true)
     try {
       const [dataProyectos, dataUsuarios] = await Promise.all([getProyectosByUsuario(idUsuarioActual), getAllUsers()])
@@ -64,24 +72,40 @@ export default function ProyectosPage() {
 
   useEffect(() => {
     fetchProyectos()
-  }, [])
+  }, [idUsuarioActual])
 
-  const handleCrearProyecto = async (datosFormulario: NuevoProyectoForm) => {
+  const handleCrearProyecto = async (
+    datosFormulario: NuevoProyectoForm & { equipoId?: number; crearNuevoEquipo?: boolean },
+  ) => {
+    if (!idUsuarioActual) return
+
     try {
-      const datosParaAPI = {
+      const datosParaAPI: any = {
         Nombre_Proyecto: datosFormulario.titulo,
         Descripción_Proyecto: datosFormulario.descripcion,
         Fecha_Inicio: datosFormulario.fecha_inicio,
         Fecha_Termino: datosFormulario.fecha_termino,
         ID_Usuario_Creador: idUsuarioActual,
-        miembros: datosFormulario.miembros,
       }
+
+      // Si se seleccionó un equipo existente, enviamos el ID del equipo
+      if (datosFormulario.equipoId) {
+        datosParaAPI.ID_Equipo = datosFormulario.equipoId
+      }
+      // Si se seleccionaron usuarios individuales, enviamos el array de miembros
+      // El backend creará automáticamente un equipo con el nombre del proyecto
+      else if (datosFormulario.miembros && datosFormulario.miembros.length > 0) {
+        datosParaAPI.miembros = datosFormulario.miembros
+      }
+
+      console.log("[v0] Datos enviados al backend:", datosParaAPI)
+
       await createProyecto(datosParaAPI)
       setShowCrearProyecto(false)
       await fetchProyectos()
     } catch (error) {
-      console.error("Error al crear el proyecto:", error)
-      alert("No se pudo crear el proyecto.")
+      console.error("[v0] Error al crear el proyecto:", error)
+      alert(`No se pudo crear el proyecto: ${error instanceof Error ? error.message : "Error desconocido"}`)
     }
   }
 
@@ -149,6 +173,7 @@ export default function ProyectosPage() {
             proyecto={proyecto}
             tareasSeleccionadas={tareasSeleccionadas}
             onSeleccionTarea={handleSeleccionTarea}
+            debeExpandirse={proyectoIdAExpandir === proyecto.id}
           />
         ))}
       </div>

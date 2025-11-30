@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-around;
     padding-top: 20px;
-    height: 60vh;
+    height: 50vh;
 }
 
 .Asignaciones_apartado {
@@ -13,7 +13,7 @@
     width: 18%;
     padding-top: 10px;
 }
-
+ 
 .Asignaciones_apartado-titulo {
     width: 85%;
     display: flex;
@@ -44,11 +44,12 @@
     transition: all 0.2s ease-in-out;
     width: 90%;
     margin-bottom: 5px;
+    color: var(--Texto-primario);
 }
 
 .Asignaciones_apartado-contenido:hover{
     scale: 1.02;
-    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.25);
+    box-shadow: var(--shadow-custom);
 }
 
 .Asignaciones_apartado-contenido-texto {
@@ -57,11 +58,13 @@
     gap: 10px;
     padding: 5px;
 }   
-
+ 
 .Asignaciones_apartado-contenido-texto p{
     margin: 0;
 }
 
 .Asignaciones_detalle {
     display: flex;
-}
+    width: 104%;
+    padding: 10px;
+} 

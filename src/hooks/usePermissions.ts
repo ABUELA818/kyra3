@@ -8,10 +8,10 @@ const ADMIN_ROLES = [1, 2, 3, 4] // Administrador general, Administrador de cana
 export function usePermissions() {
   const { usuario } = useUser()
 
-  const canCreateProject = usuario ? ADMIN_ROLES.includes(usuario.ID_Rol) : false
-  const canCreateAssignment = usuario ? ADMIN_ROLES.includes(usuario.ID_Rol) : false
-  const canModifyAssignment = usuario ? ADMIN_ROLES.includes(usuario.ID_Rol) : false
-  const canDeleteAssignment = usuario ? ADMIN_ROLES.includes(usuario.ID_Rol) : false
+  const canCreateProject = usuario ? ADMIN_ROLES.includes(usuario.rol) : false
+  const canCreateAssignment = usuario ? ADMIN_ROLES.includes(usuario.rol) : false
+  const canModifyAssignment = usuario ? ADMIN_ROLES.includes(usuario.rol) : false
+  const canDeleteAssignment = usuario ? ADMIN_ROLES.includes(usuario.rol) : false
 
   return {
     canCreateProject,
@@ -21,3 +21,4 @@ export function usePermissions() {
     userRole: usuario?.ID_Rol,
   }
 }
+ 
