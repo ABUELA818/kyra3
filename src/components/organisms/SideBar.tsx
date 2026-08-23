@@ -1,6 +1,5 @@
 "use client"
 
-import Imagenes from "../atoms/Imagenes"
 import TextLink from "../atoms/text-links"
 import EquiposDropdown from "../molecules/Equipos_Lista"
 import { useInbox } from "@/context/inbox-context"
@@ -64,7 +63,10 @@ export default function SideBar() {
   return (
     <aside className="SideBar">
       <div className="sidebar-content">
-        <Imagenes src="/assets/veintidos.png" alt="Logo" width={140} height={25} />
+        <div className="synko-brand" aria-label="Synko">
+          <span className="synko-brand-mark">S</span>
+          <span className="synko-brand-name">Synko</span>
+        </div>
         <TextLink href="/Inicio" Texto="Inicio" color="#FCFCF7" TamañoLetra={15} />
         <button
           onClick={handleInboxToggle}

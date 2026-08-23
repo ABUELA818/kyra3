@@ -11,9 +11,35 @@ aside {
   height: 100%;
 }
 
-.ImagenLogo {
+.synko-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   margin-top: 20px;
   margin-bottom: 40px;
+  color: var(--foreground);
+  line-height: 1;
+}
+
+.synko-brand-mark {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  font-family: var(--font-heading), var(--font-sans), sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.06em;
+}
+
+.synko-brand-name {
+  font-family: var(--font-heading), var(--font-sans), sans-serif;
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: -0.075em;
 }
 
 .inbox-button {
