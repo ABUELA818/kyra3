@@ -20,6 +20,8 @@ interface DetalleProps {
   historial: HistorialItem[]
   loadingHistorial: boolean
   estilo: string
+  tamaño: number
+  tamaño2: number
   onAsignacionActualizada?: () => void
   isCreador?: boolean
 }
