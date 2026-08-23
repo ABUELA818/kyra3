@@ -1,76 +1,63 @@
 /* Agregando variables CSS para sistema de temas completo */
 :root {
-  /*Fondos*/
-  --Fondo-pantalla: #FCFCF7;
-  --Fondo-elementos: #FCFCF7;
-  --Fondo-elementos2: #fcfcf7;
-  --Fondo-sidebar: #212529;
-
-  /*Textos*/
-  --Texto-primario: #111315;
-  --Texto-segundo: #FCFCF7;
+  --Fondo-pantalla: #f6f7fb;
+  --Fondo-elementos: #ffffff;
+  --Fondo-elementos2: #eef1f6;
+  --Fondo-sidebar: #172033;
+  --Texto-primario: #172033;
+  --Texto-segundo: #ffffff;
   --Texto-blanco: #ffffff;
-  --Texto-tercero: #808588;
+  --Texto-tercero: #667085;
+  --Btn-cancelar: #b42318;
+  --Btn-primario: #3657d6;
+  --Btn-primario-hover: #2947bd;
+  --Borde-tabla: #d9deea;
+  --Borde-suave: #e6e9f0;
+  --Hover-tabla: #f0f3f9;
+  --Hover-inbox: #263452;
+  --Hover-cancelar: #912018;
+  --seleccion-1: #dbe4ff;
+  --seleccion-2: #aebeff;
+  --Input-Fondo: #f1f3f7;
+  --success: #067647;
+  --warning: #b54708;
+  --overlay: rgb(23 32 51 / 52%);
+  --shadow-custom: 0 8px 24px rgb(23 32 51 / 10%);
+  --radius-control: 0.5rem;
+  --radius-card: 0.75rem;
+  --radius-modal: 1rem;
+  --font-body: var(--font-work-sans), sans-serif;
+} 
 
-  /*Botones*/
-  --Btn-cancelar: #960018;
-  --Btn-primario: #212529;
-
-  /*Bordes*/
-  --Borde-tabla: #111315;
-  --Borde-suave: #e0e0e0;
-
-  /*Hover*/
-  --Hover-tabla: #DCDCD7;
-  --Hover-inbox: #4d4d4d;
-  --Hover-cancelar: #6a0314;
-
-  /* seleccion */
-  --seleccion-1: #acacac;
-  --seleccion-2: #7C7D7C;
-
-  /*Input*/
-  --Input-Fondo: #EBEBE8;
-
-  /*Shadow*/
-  --shadow-custom: 2px 2px 2px 2px rgba(0,0,0,0.3);
+@theme inline {
+  --color-background: var(--Fondo-pantalla);
+  --color-foreground: var(--Texto-primario);
+  --color-primary: var(--Btn-primario);
+  --color-card: var(--Fondo-elementos);
+  --color-border: var(--Borde-suave);
+  --font-sans: var(--font-work-sans);
+  --font-mono: var(--font-geist-mono);
 }
 
 /* Tema oscuro con todas las variables redefinidas */
 .dark-theme {
-  /*Fondos*/
-  --Fondo-pantalla: #111315;
-  --Fondo-elementos: #252628;
-  --Fondo-elementos2: #171819;
-  --Fondo-sidebar: #171819;
-
-  /*Textos*/
-  --Texto-primario: #FCFCF7;
-  --Texto-segundo: #111315;
-  --Texto-tercero: #717376;
-  --Texto-blanco: #ffffff;
-
-  /*Botones*/
-  --Btn-cancelar: #960018;
-  --Btn-primario: #0E1012;
-
-  /*Bordes*/
-  --Borde-tabla: #FCFCF7;
-  --Borde-suave: #e0e0e0;
-
-  /*Hover*/
-  --Hover-tabla: #434343;
-  --Hover-inbox: #2a2a2a;
-
-  /* seleccion */
-  --seleccion-1: #3e3e3e;
-  --seleccion-2: #7C7D7C;
-
-  /*Input*/
-  --Input-Fondo: #404142;
-
-  /*Shadow*/
-  --shadow-custom: 2px 2px 2px 2px rgba(0,0,0,0.7);
+  --Fondo-pantalla: #101828;
+  --Fondo-elementos: #18243a;
+  --Fondo-elementos2: #202f49;
+  --Fondo-sidebar: #0b1220;
+  --Texto-primario: #f8fafc;
+  --Texto-segundo: #ffffff;
+  --Texto-tercero: #aab6ca;
+  --Borde-tabla: #34435f;
+  --Borde-suave: #2b3953;
+  --Hover-tabla: #22324f;
+  --Hover-inbox: #2a3a5a;
+  --seleccion-1: #293b70;
+  --seleccion-2: #526ec8;
+  --Input-Fondo: #22304a;
+  --Btn-primario: #6e86ef;
+  --Btn-primario-hover: #8298f5;
+  --shadow-custom: 0 8px 24px rgb(0 0 0 / 24%);
 }
 
 .layout {
@@ -101,7 +88,7 @@
 body {
   grid-area: body;
   background-color: var(--Fondo-pantalla);
-  color: var(--Texto-blanco);
+  color: var(--Texto-primario);
   transition: background-color 0.3s ease, color 0.3s ease;
   height: 100vh;
   overflow-x: hidden;
@@ -111,10 +98,48 @@ body {
   background-color: var(--Fondo-sidebar);
   transition: background-color 0.3s ease;
   margin: 0;
-  padding: 20px 16px;
+  padding: 1.25rem 1rem;
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 1rem;
   height: 100%;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+button, input, textarea, select { font: inherit; }
+
+button { border-radius: var(--radius-control); transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, box-shadow 160ms ease; }
+button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible { outline: 3px solid color-mix(in srgb, var(--Btn-primario) 28%, transparent); outline-offset: 2px; }
+
+.boton {
+  min-height: 2.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.875rem;
+  border: 1px solid var(--Btn-primario);
+  background: var(--Btn-primario);
+  color: var(--Texto-segundo);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+.boton:hover { background: var(--Btn-primario-hover); border-color: var(--Btn-primario-hover); }
+.boton:disabled { cursor: not-allowed; opacity: 0.55; }
+
+.modal-overlay, .filtros-modal-overlay {
+  background: var(--overlay);
+  backdrop-filter: blur(4px);
+}
+.modal-content, .filtros-modal-content, .Crear_Equipos_Formulario {
+  border-radius: var(--radius-modal);
+  box-shadow: var(--shadow-custom);
+}
+
+@media (max-width: 767px) {
+  .layout { display: block; }
+  body { height: auto; min-height: 100vh; }
 }
  
